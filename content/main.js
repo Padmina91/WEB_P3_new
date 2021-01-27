@@ -50,7 +50,7 @@ class DetailView {
    }
 }
 
-class ListView {
+class ListEmployeesView {
 
    constructor (element, template) {
       this.element = element;
@@ -60,7 +60,7 @@ class ListView {
 
    render () {
       // Daten anfordern
-      this.do_render(null);
+      this.do_render();
       /*let path = "/app/";
       let requester_o = new APPUTIL.Requester();
       requester_o.GET(path)
@@ -72,7 +72,7 @@ class ListView {
       });*/
    }
 
-   do_render (data) {
+   do_render (data = null) {
       let markup = APPUTIL.template_manager.execute(this.template, data);
       let element = document.getElementById(this.element);
       if (element != null) {
@@ -109,24 +109,16 @@ class ListView {
 
 class Sidebar {
 
-   constructor (element, template) {
-      this.element = element;
-      this.template = template;
-      this.configHandleEvent();
-   }
+   constructor () {}
 
    configHandleEvent () {
-      console.log("configHandleEvent läuft...");
-      let links = document.getElementsByClassName("sidebar-link");
-      console.log(links);
+      const links = document.getElementsByClassName("sidebar-link");
       for (let link of links) {
-         console.log("EventListener wird aktiviert...");
-         link.addEventListener("click", this.handleEvent);
+         link.addEventListener('click', this.handleEvent);
       }
    }
 
    handleEvent (event) {
-      console.log("Ein Link in der Sidebar wurde geklickt!");
       APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
       event.preventDefault();
    }
@@ -135,12 +127,11 @@ class Sidebar {
 class Application {
 
    constructor () {
-      // Registrieren zum Empfang von Nachrichten
       APPUTIL.event_service.subscribe(this, "templates.loaded");
       APPUTIL.event_service.subscribe(this, "templates.failed");
       APPUTIL.event_service.subscribe(this, "app.cmd");
-      this.sidebar = new Sidebar("sidebar", "sidebar.html");
-      this.list_view = new ListView("content", "list.html");
+      this.sidebar = new Sidebar();
+      this.list_employee_view = new ListEmployeesView("content", "list_employees.html");
       this.detail_view = new DetailView("content", "detail.html");
    }
 
@@ -159,34 +150,42 @@ class Application {
          break;
       case "templates.loaded":
          this.fill_inner_html("header.html", "head-flex-container");
-         console.log("Sidebar HTML wird hinzugefügt...");
-         this.sidebar.configHandleEvent();
          this.fill_inner_html("sidebar.html", "sidebar");
+         this.sidebar.configHandleEvent();
          this.fill_inner_html("home.html", "content");
          break;
       case "app.cmd":
-         // hier müsste man überprüfen, ob der Inhalt gewechselt werden darf
          switch (data[0]) {
-         case "list_employees":
-            this.list_view.render();
-            break;
-         case "home":
-            let markup_s = APPUTIL.template_manager.execute("home.html", null);
-            let el_o = document.querySelector("index");
-            if (el_o != null) {
-               el_o.innerHTML = markup_s;
-            }
-            break;
-         case "list":
-            // Daten anfordern und darstellen
-            this.list_view.render();
-            break;
-         case "detail":
-            this.detail_view.render(data[1]);
-            break;
-         case "idBack":
-            APPUTIL.event_service.publish("app.cmd", ["list", null]);
-            break;
+            case "home":
+               this.fill_inner_html("home.html", "content");
+               break;
+            case "list_employees":
+               this.list_employee_view.render();
+               break;
+            case "list_trainings":
+               // TODO: Hier weitermachen.
+               break;
+            case "participation_employees":
+
+               break;
+            case "participation_trainings":
+
+               break;
+            case "evaluation_employees":
+
+               break;
+            case "evaluation_trainings":
+
+               break;
+            case "evaluation_certificates":
+
+               break;
+            case "detail":
+               this.detail_view.render(data[1]);
+               break;
+            case "idBack":
+               APPUTIL.event_service.publish("app.cmd", ["list", null]);
+               break;
          }
          break;
       }
