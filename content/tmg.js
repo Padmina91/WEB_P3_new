@@ -31,10 +31,10 @@ APPUTIL.TemplateManager = class {
       requester_o.GET(path_s)
       .then (result_spl => {
          this.templates_o = JSON.parse(result_spl)['templates'];
-         APPUTIL.event_service.publish_px("templates.loaded", null);
+         APPUTIL.event_service.publish("templates.loaded", null);
       })
       .catch (error_opl => {
-         APPUTIL.event_service.publish_px("templates.failed", "");
+         APPUTIL.event_service.publish("templates.failed", "");
       });
    }
 
@@ -46,7 +46,7 @@ APPUTIL.TemplateManager = class {
       }
    }
 
-   execute_px (name_spl, data_opl) {
+   execute (name_spl, data_opl) {
       var compiled_o = null;
       if (name_spl in this.compiled_o) {
          compiled_o = this.compiled_o[name_spl];
@@ -66,7 +66,7 @@ APPUTIL.TemplateManager = class {
    }
 }
 
-APPUTIL.createTemplateManager_px = function () {
+APPUTIL.createTemplateManager = function () {
    APPUTIL.template_manager = new APPUTIL.TemplateManager();
    APPUTIL.template_manager.init_px();
 }

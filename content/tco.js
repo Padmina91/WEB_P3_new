@@ -37,7 +37,7 @@ APPUTIL.Generator = class {
       } else if (code_spl.startsWith('include')) {
          // Aufbau: include template data-object
          let parts_a = code_spl.split(' '); // einfache Lösung
-         this.code_a.push('result_a.push(new APPUTIL.TemplateManager().execute_px("' + parts_a[1] + '", ' + parts_a[2] + '));\n');
+         this.code_a.push('result_a.push(new APPUTIL.TemplateManager().execute("' + parts_a[1] + '", ' + parts_a[2] + '));\n');
       } else {
          this.code_a.push(code_spl + '\n');
       }

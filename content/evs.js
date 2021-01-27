@@ -19,7 +19,7 @@ APPUTIL.EventService = class {
       this.Method_o     = null;
    }
 
-   subscribe_px (Subscriber_opl, Message_spl) {
+   subscribe (Subscriber_opl, Message_spl) {
       if (Message_spl in this.Subscriber_o) {
          // Message bekannt, Liste der Subscriber untersuchen
          if (this.Subscriber_o[Message_spl].indexOf(Subscriber_opl) == -1) {
@@ -31,7 +31,7 @@ APPUTIL.EventService = class {
       }
    }
 
-   unSubscribe_px (Subscriber_opl, Message_spl) {
+   unsubscribe (Subscriber_opl, Message_spl) {
       if (Message_spl in this.Subscriber_o) {
          // Message bekannt, Liste der Subscriber untersuchen
          var Entry_a = this.Subscriber_o[Message_spl];
@@ -50,7 +50,7 @@ APPUTIL.EventService = class {
       }
    }
 
-   publish_px (Message_spl, Data_opl) {
+   publish (Message_spl, Data_opl) {
       console.info('es - publish ' + Message_spl);
 
       this.each_p(this.Subscriber_o, function (value_apl, key_spl) {

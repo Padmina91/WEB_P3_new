@@ -37,8 +37,13 @@ h1 {
    margin: 0.5rem;
 }
 
-.menu-item > a {
+.menu-item p {
    display: block;
+   text-decoration: underline;
+}
+
+.menu-item p:hover {
+   cursor: pointer;
 }
 
 #content {

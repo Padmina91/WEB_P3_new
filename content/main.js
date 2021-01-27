@@ -27,7 +27,7 @@ class DetailView {
    }
 
    do_render (data) {
-      let markup = APPUTIL.template_manager.execute_px(this.template, data);
+      let markup = APPUTIL.template_manager.execute(this.template, data);
       let element = document.querySelector(this.element);
       if (element != null) {
          element.innerHTML = markup;
@@ -44,7 +44,7 @@ class DetailView {
 
    handleEvent (event) {
       if (event.target.id == "idBack") {
-         APPUTIL.event_service.publish_px("app.cmd", ["idBack", null]);
+         APPUTIL.event_service.publish("app.cmd", ["idBack", null]);
          event.preventDefault();
       }
    }
@@ -60,7 +60,8 @@ class ListView {
 
    render () {
       // Daten anfordern
-      let path = "/app/";
+      this.do_render(null);
+      /*let path = "/app/";
       let requester_o = new APPUTIL.Requester();
       requester_o.GET(path)
       .then (result => {
@@ -68,45 +69,45 @@ class ListView {
       })
       .catch (error => {
          alert("fetch-error (get)");
-      });
+      });*/
    }
 
    do_render (data) {
-      let markup = APPUTIL.template_manager.execute_px(this.template, data);
-      let element = document.querySelector(this.element);
+      let markup = APPUTIL.template_manager.execute(this.template, data);
+      let element = document.getElementById(this.element);
       if (element != null) {
          element.innerHTML = markup;
       }
    }
 
    configHandleEvent () {
-      let element = document.querySelector(this.element);
+      let element = document.getElementById(this.element);
       if (element != null) {
          element.addEventListener("click", this.handleEvent);
       }
    }
 
-   handleEvent (event_opl) {
-      if (event_opl.target.tagName.toUpperCase() == "TD") {
+   handleEvent (event) {
+      if (event.target.tagName.toUpperCase() == "TD") {
          let elx = document.querySelector(".clSelected");
          if (elx != null) {
             elx.classList.remove("clSelected");
          }
-         event_opl.target.parentNode.classList.add("clSelected");
-         event_opl.preventDefault();
-      } else if (event_opl.target.id == "idShowListEntry") {
+         event.target.parentNode.classList.add("clSelected");
+         event.preventDefault();
+      } else if (event.target.id == "idShowListEntry") {
          let elx = document.querySelector(".clSelected");
          if (elx == null) {
             alert("Bitte zuerst einen Eintrag auswählen!");
          } else {
-            APPUTIL.event_service.publish_px("app.cmd", ["detail", elx.id] );
+            APPUTIL.event_service.publish("app.cmd", ["detail", elx.id] );
          }
-         event_opl.preventDefault();
+         event.preventDefault();
       }
    }
 }
 
-class SideBar {
+class Sidebar {
 
    constructor (element, template) {
       this.element = element;
@@ -114,24 +115,20 @@ class SideBar {
       this.configHandleEvent();
    }
 
-   render (data_opl) {
-      let markup_s = APPUTIL.template_manager.execute_px(this.template, data_opl);
-      let el_o = document.getElementById(this.element);
-      if (el_o != null) {
-         el_o.innerHTML = markup_s;
-      }
-   }
-
    configHandleEvent () {
-      let el_o = document.getElementById(this.element);
-      if (el_o != null) {
-         el_o.addEventListener("click", this.handleEvent);
+      console.log("configHandleEvent läuft...");
+      let links = document.getElementsByClassName("sidebar-link");
+      console.log(links);
+      for (let link of links) {
+         console.log("EventListener wird aktiviert...");
+         link.addEventListener("click", this.handleEvent);
       }
    }
 
-   handleEvent (event_opl) {
-      let cmd_s = event_opl.target.dataset.action;
-      APPUTIL.event_service.publish_px("app.cmd", [cmd_s, null]);
+   handleEvent (event) {
+      console.log("Ein Link in der Sidebar wurde geklickt!");
+      APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
+      event.preventDefault();
    }
 }
 
@@ -139,41 +136,42 @@ class Application {
 
    constructor () {
       // Registrieren zum Empfang von Nachrichten
-      APPUTIL.event_service.subscribe_px(this, "templates.loaded");
-      APPUTIL.event_service.subscribe_px(this, "templates.failed");
-      APPUTIL.event_service.subscribe_px(this, "app.cmd");
-      this.sideBar_o = new SideBar("sidebar", "sidebar.tpl.html");
-      this.listView_o = new ListView("index", "list.tpl.html");
-      this.detailView_o = new DetailView("index", "detail.tpl.html");
+      APPUTIL.event_service.subscribe(this, "templates.loaded");
+      APPUTIL.event_service.subscribe(this, "templates.failed");
+      APPUTIL.event_service.subscribe(this, "app.cmd");
+      this.sidebar = new Sidebar("sidebar", "sidebar.html");
+      this.list_view = new ListView("content", "list.html");
+      this.detail_view = new DetailView("content", "detail.html");
    }
 
-   notify (self, message_spl, data_opl) {
-      switch (message_spl) {
+   fill_inner_html(tpl_name, html_id) {
+      let markup = APPUTIL.template_manager.execute(tpl_name, null);
+      let element = document.getElementById(html_id);
+      if (element != null) {
+         element.innerHTML = markup;
+      }
+   }
+
+   notify (self, message, data) {
+      switch (message) {
       case "templates.failed":
          alert("Vorlagen konnten nicht geladen werden.");
          break;
       case "templates.loaded":
-         let markup_header = APPUTIL.template_manager.execute_px("header.tpl.html", null);
-         let header_element = document.getElementById("head-flex-container");
-         if (header_element != null) {
-            header_element.innerHTML = markup_header;
-         }
-         let markup_sidebar = APPUTIL.template_manager.execute_px("sidebar.tpl.html", null);
-         let sidebar_element = document.getElementById("sidebar");
-         if (sidebar_element != null) {
-            sidebar_element.innerHTML = markup_sidebar;
-         }
-         let markup_body = APPUTIL.template_manager.execute_px("home.tpl.html", null);
-         let body_element = document.getElementById("content");
-         if (body_element != null) {
-            body_element.innerHTML = markup_body;
-         }
+         this.fill_inner_html("header.html", "head-flex-container");
+         console.log("Sidebar HTML wird hinzugefügt...");
+         this.sidebar.configHandleEvent();
+         this.fill_inner_html("sidebar.html", "sidebar");
+         this.fill_inner_html("home.html", "content");
          break;
       case "app.cmd":
          // hier müsste man überprüfen, ob der Inhalt gewechselt werden darf
-         switch (data_opl[0]) {
+         switch (data[0]) {
+         case "list_employees":
+            this.list_view.render();
+            break;
          case "home":
-            let markup_s = APPUTIL.template_manager.execute_px("home.tpl.html", null);
+            let markup_s = APPUTIL.template_manager.execute("home.html", null);
             let el_o = document.querySelector("index");
             if (el_o != null) {
                el_o.innerHTML = markup_s;
@@ -181,13 +179,13 @@ class Application {
             break;
          case "list":
             // Daten anfordern und darstellen
-            this.listView_o.render();
+            this.list_view.render();
             break;
          case "detail":
-            this.detailView_o.render(data_opl[1]);
+            this.detail_view.render(data[1]);
             break;
          case "idBack":
-            APPUTIL.event_service.publish_px("app.cmd", ["list", null]);
+            APPUTIL.event_service.publish("app.cmd", ["list", null]);
             break;
          }
          break;
@@ -198,5 +196,5 @@ class Application {
 window.onload = function () {
    APPUTIL.event_service = new APPUTIL.EventService();
    var app = new Application();
-   APPUTIL.createTemplateManager_px();
+   APPUTIL.createTemplateManager();
 }
