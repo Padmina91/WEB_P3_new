@@ -1,0 +1,118 @@
+body {
+   background: rgb(176, 223, 255);
+   font-family: 'Nunito', sans-serif;
+   color: rgb(0, 0, 68);
+   font-weight: 500;
+   justify-content: center;
+   font-size: 1.1rem;
+}
+
+h1 {
+   font-size: 1.7rem;
+}
+
+#head-flex-container, #body-flex-container {
+   display: flex;
+}
+
+.left-flex-row, .right-flex-row {
+   display: flex;
+   flex-direction: column;
+   margin: 1.5rem;
+   padding: 1.5rem;
+}
+
+.left-flex-row {
+   width: 20%;
+   background: rgba(63, 217, 255, 0.753);
+}
+
+.right-flex-row {
+   width: 80%;
+   background: rgba(98, 224, 255, 0.753);
+}
+
+.menu-item {
+   padding: 0.5rem;
+   margin: 0.5rem;
+}
+
+.menu-item > a {
+   display: block;
+}
+
+#content {
+   margin: 0.2rem;
+}
+
+.row-oriented-table {
+   display: flex;
+   flex-wrap: wrap; /* Elemente können bei Platzmangel in die nächste Zeile springen */
+   margin: 1px;
+   padding: 10px;
+   /*align-items: center;*/
+}
+
+.nested-row-oriented-table {
+   display: flex;
+   flex-wrap: wrap;
+   box-sizing: border-box;
+   flex-direction: row;
+   align-items: center;
+}
+
+.rtable-cell, .rtable-head {
+   justify-content: space-around;
+   box-sizing: border-box;
+   flex-grow: 1;
+   width: 100%;
+   padding: 0.5em 0.1em;
+   overflow: hidden;
+   border: solid 1px black;
+   background: rgb(255, 254, 166);
+   text-align: center;
+}
+
+.no-border {
+   border: none;
+   background: none;
+}
+
+.rtable-head {
+   border: solid 1px black;
+   background: rgb(255, 252, 88);
+   font-weight: 800;
+}
+
+.rtable-1-cols > .rtable-cell, .rtable-1-cols > .rtable-head {width: 100%;}
+.rtable-2-cols > .rtable-cell, .rtable-2-cols > .rtable-head {width: 50%;}
+.rtable-3-cols > .rtable-cell, .rtable-3-cols > .rtable-head {width: 33.3%;}
+.rtable-4-cols > .rtable-cell, .rtable-4-cols > .rtable-head {width: 25%;}
+.rtable-5-cols > .rtable-cell, .rtable-5-cols > .rtable-head {width: 20%;}
+.rtable-6-cols > .rtable-cell, .rtable-6-cols > .rtable-head {width: 16.6%;}
+.rtable-7-cols > .rtable-cell, .rtable-7-cols > .rtable-head {width: 14.28%;}
+
+input.rtable-cell {
+   background: white;
+   border: 1px solid darkgrey;
+   border-radius: 0.3rem;
+}
+
+a:link, a:visited, a:hover, a:active {
+   color: rgb(72, 0, 189);
+   font-weight: 600;
+}
+
+a.pseudo-button, input.pseudo-button, button {
+   font-family: 'Quicksand', sans-serif;
+   color: black;
+   font-weight: 700;
+   font-size: 1rem;
+   text-decoration: none;
+   border: 1px solid darkgrey;
+   border-radius: 0.3rem;
+   background: lightgray;
+   padding: 0.2rem;
+   cursor: pointer;
+   margin: 2px;
+}
