@@ -10,7 +10,7 @@ class ListEmployeesView {
 
    render () {
       // Daten anfordern
-      let path = "/app/";
+      let path = "/app/None/False/True";
       let requester = new APPUTIL.Requester();
       requester.GET(path)
       .then (result => {
@@ -45,7 +45,7 @@ class ListEmployeesView {
          if (!button.classList.contains("delete-button")) {
             button.addEventListener("click", this.handleClickEvent);
          } else {
-            button.addEventListener("click", this.handleDeleteEvent);
+            button.addEventListener("click", this.handleDeleteEvent.bind(this));
          }
       }
    }
@@ -81,7 +81,6 @@ class ListEmployeesView {
       }
       event.preventDefault();*/
    }
-
 
    handleDeleteEvent(event) {
       let selected_entry = document.getElementsByClassName("selected");

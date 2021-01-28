@@ -5,20 +5,6 @@ import json
 from .database import Database
 from .view import View
 
-# Übersicht Anforderungen / Methoden
-
-"""
-
-Anforderung       GET
--------------------------
-/                 Liste
-                  liefern
-
-/{id}             Detail
-                  mit {id}
-                  liefern
-"""
-
 class Application:
 
    exposed = True # gilt für alle Methoden
@@ -27,16 +13,30 @@ class Application:
       self.database = Database()
       self.view = View()
 
-   def GET(self, id=None):
-      data = self.database.employee_data
+   def GET(self, id=None, training=False, employee=False):
       return_value = ''
-      if id == None:
-         return_value = json.dumps(data)
+      if training == 'True':
+         if id == 'None':
+            return_value = json.dumps(self.database.read_training())
+         else:
+            return_value = json.dumps(self.database.read_training(id))
+      elif employee == 'True':
+         if id == 'None':
+            return_value = json.dumps(self.database.employee_data)
+         else:
+            return_value = json.dumps(self.database.read_employee(id))
       else:
-         return_value = json.dumps(data)
+         return_value = json.dumps(self.database.calculate_home_data())
+      print(return_value)
       return return_value
 
-   def DELETE(self, id=None):
-      if id != None:
-         self.database.delete_employee_entry(id)
-      return json.dumps(self.database.employee_data)
+   def DELETE(self, id=None, training=False, employee=False):
+      return_value = ''
+      if id != 'None':
+         if employee == "True":
+            self.database.delete_employee_entry(id)
+            return_value = json.dumps(self.database.employee_data)
+         elif training == "True":
+            self.database.delete_training_entry(id)
+            return_value = json.dumps(self.database.training_data)
+      return return_value

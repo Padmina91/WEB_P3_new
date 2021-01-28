@@ -68,7 +68,7 @@ class Database:
       status = False
       for employee in self.employee_data:
          if str(employee['id']) == str(id):
-            employee['Data'] = employee_data
+            employee['Daten'] = employee_data
             self.save_employee_data(id)
             status = True
             break
@@ -78,7 +78,7 @@ class Database:
       status = False
       for training in self.training_data:
          if str(training['id']) == str(id):
-            training['Data'] = training_data
+            training['Daten'] = training_data
             self.save_training_data(id)
             status = True
             break
@@ -165,6 +165,7 @@ class Database:
       status = False
       file_name = str(id) + ".json"
       path_with_file_name = os.path.join(self.employee_dir, file_name)
+      print(path_with_file_name)
       if (os.path.exists(path_with_file_name)):
          os.remove(path_with_file_name)
          self.read_employee_data() # update self.employee_data after deletion
@@ -288,13 +289,13 @@ class Database:
    def calculate_evaluation_certificates(self):
       certificates_alphabetical = list()
       for training in self.training_data:
-         if len(training['Data'][7]) == 1:
-            certificates_alphabetical.append([training['id'], training['Data'][7][0], list()])
+         if len(training['Daten'][7]) == 1:
+            certificates_alphabetical.append([training['id'], training['Daten'][7][0], list()])
       certificates_alphabetical.sort(key=operator.itemgetter(1))
       for i in range(len(certificates_alphabetical)):
          for employee in self.employee_data:
-            if certificates_alphabetical[i][0] in employee['Data'][4] and employee['Data'][4][certificates_alphabetical[i][0]] == "erfolgreich beendet":
-               certificates_alphabetical[i][2].append([employee['Data'][0], employee['Data'][1], employee['Data'][2], employee['Data'][3]])
+            if certificates_alphabetical[i][0] in employee['Daten'][4] and employee['Daten'][4][certificates_alphabetical[i][0]] == "erfolgreich beendet":
+               certificates_alphabetical[i][2].append([employee['Daten'][0], employee['Daten'][1], employee['Daten'][2], employee['Daten'][3]])
          certificates_alphabetical[i][2].sort(key=operator.itemgetter(0))
       return certificates_alphabetical
 
@@ -304,8 +305,10 @@ class Database:
       num_of_trainings_finished = 0
       num_of_trainings_currently_running = 0
       for training in self.training_data:
-         start_date = self.validator.get_date(training['Data'][1])
-         end_date = self.validator.get_date(training['Data'][2])
+         print("in der calculate_home_data. training:")
+         print(training)
+         start_date = self.validator.get_date(training['Daten'][1])
+         end_date = self.validator.get_date(training['Daten'][2])
          today = self.validator.today
          if start_date > today:
             num_of_trainings_in_planning += 1
@@ -320,8 +323,8 @@ class Database:
       training_data = self.read_training[id]
       data = [training_data[0], training_data[1], training_data[2], training_data[7], training_data[6], list()]
       for employee in self.employee_data:
-         if id in employee['Data'][4]:
-            data[5].append([employee['Data'][0], employee['Data'][1], employee['Data'][2], employee['Data'][3], employee['Data'][4][id]])
+         if id in employee['Daten'][4]:
+            data[5].append([employee['Daten'][0], employee['Daten'][1], employee['Daten'][2], employee['Daten'][3], employee['Daten'][4][id]])
       return data
 
 # ---------------------------------------------------------------------------------------------------------------------------------
