@@ -1,1 +1,38 @@
-Platzhalter list_employees.html
+<div class="row-oriented-table rtable-4-cols">
+    <!-- Table Head -->
+    <div class="rtable-head">Name</div>
+    <div class="rtable-head">Vorname</div>
+    <div class="rtable-head">Akademische Grade</div>
+    <div class="rtable-head">Tätigkeit</div>
+<!-- Table Content -->
+@let i@
+@for i = 0; i < context.length; i++@
+    @entry = context[i];@
+    @id = "id-" + entry['id']@
+        <div class="#id# rtable-cell entry">#entry['Daten'][0]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][1]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][2]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][3]#</div>
+@endfor@
+</div>
+<!-- Table Foot -->
+<div class="row-oriented-table rtable-7-cols">
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button" data-href="/edit_employee">ändern</p>
+    </div>
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button delete-button" data-href="/delete_employee">löschen</p>
+    </div>
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button" data-href="/show_employee">anzeigen</p>
+    </div>
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+</div>
+<div class="row-oriented-table rtable-1-cols">
+    <div class="rtable-cell no-border nested-row-oriented-table">
+        <p class="pseudo-button" data-href="/add_employee">erfassen</p>
+    </div>
+</div>

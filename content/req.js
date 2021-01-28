@@ -27,7 +27,7 @@ APPUTIL.Requester = class {
       return this.request_px('PUT', path_spl, data_opl);
    }
 
-   DELETE_px (path_spl) {
+   DELETE (path_spl) {
       return this.request_px('DELETE', path_spl);
    }
 

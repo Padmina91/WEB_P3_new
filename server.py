@@ -35,21 +35,14 @@ def main():
    cherrypy.tree.mount(
       application.Application(),
       '/app',
-      {'/': {
-         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-         'tools.response_headers.on': True,
-         'tools.response_headers.headers': [('Content-Type', 'text/plain')]}
-      }
+      {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
    )
 
    # 3. Eintrag: Method-Dispatcher für die "Template" "templates" vereinbaren
    cherrypy.tree.mount(
       template.Template(),
       '/templates',
-      {'/': {
-         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-         'tools.response_headers.on': True,
-         'tools.response_headers.headers': [('Content-Type', 'text/plain')]}
+      {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
       }
    )
 

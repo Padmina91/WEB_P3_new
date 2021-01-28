@@ -1,7 +1,7 @@
 # coding: utf-8
 
 import cherrypy
-
+import json
 from .database import Database
 from .view import View
 
@@ -21,25 +21,22 @@ Anforderung       GET
 
 class Application:
 
+   exposed = True # gilt für alle Methoden
+
    def __init__(self):
       self.database = Database()
       self.view = View()
 
-   @cherrypy.expose
    def GET(self, id=None):
+      data = self.database.employee_data
       return_value = ''
       if id == None:
-         return_value = self.getList()
+         return_value = json.dumps(data)
       else:
-         return_value = self.getDetail(id)
+         return_value = json.dumps(data)
       return return_value
 
-   def getList(self):
-      data_a = self.database.read()
-      # default-Werte entfernen
-      ndata_a = data_a[1:]
-      return self.view.createList_px(ndata_a)
-
-   def getDetail(self, id_spl):
-      data_o = self.database.read(id_spl)
-      return self.view.createDetail_px(data_o)
+   def DELETE(self, id=None):
+      if id != None:
+         self.database.delete_employee_entry(id)
+      return json.dumps(self.database.employee_data)

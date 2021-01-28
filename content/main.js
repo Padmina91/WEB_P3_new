@@ -50,80 +50,6 @@ class DetailView {
    }
 }
 
-class ListEmployeesView {
-
-   constructor (element, template) {
-      this.element = element;
-      this.template = template;
-      this.configHandleEvent();
-   }
-
-   render () {
-      // Daten anfordern
-      this.do_render();
-      /*let path = "/app/";
-      let requester_o = new APPUTIL.Requester();
-      requester_o.GET(path)
-      .then (result => {
-            this.do_render(JSON.parse(result));
-      })
-      .catch (error => {
-         alert("fetch-error (get)");
-      });*/
-   }
-
-   do_render (data = null) {
-      let markup = APPUTIL.template_manager.execute(this.template, data);
-      let element = document.getElementById(this.element);
-      if (element != null) {
-         element.innerHTML = markup;
-      }
-   }
-
-   configHandleEvent () {
-      let element = document.getElementById(this.element);
-      if (element != null) {
-         element.addEventListener("click", this.handleEvent);
-      }
-   }
-
-   handleEvent (event) {
-      if (event.target.tagName.toUpperCase() == "TD") {
-         let elx = document.querySelector(".clSelected");
-         if (elx != null) {
-            elx.classList.remove("clSelected");
-         }
-         event.target.parentNode.classList.add("clSelected");
-         event.preventDefault();
-      } else if (event.target.id == "idShowListEntry") {
-         let elx = document.querySelector(".clSelected");
-         if (elx == null) {
-            alert("Bitte zuerst einen Eintrag auswählen!");
-         } else {
-            APPUTIL.event_service.publish("app.cmd", ["detail", elx.id] );
-         }
-         event.preventDefault();
-      }
-   }
-}
-
-class Sidebar {
-
-   constructor () {}
-
-   configHandleEvent () {
-      const links = document.getElementsByClassName("sidebar-link");
-      for (let link of links) {
-         link.addEventListener('click', this.handleEvent);
-      }
-   }
-
-   handleEvent (event) {
-      APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
-      event.preventDefault();
-   }
-}
-
 class Application {
 
    constructor () {
@@ -132,6 +58,12 @@ class Application {
       APPUTIL.event_service.subscribe(this, "app.cmd");
       this.sidebar = new Sidebar();
       this.list_employee_view = new ListEmployeesView("content", "list_employees.html");
+      this.list_training_view = new ListTrainingsView("content", "list_trainings.html");
+      this.participation_employees_view = new ParticipationEmployeesView("content", "participation_employees.html");
+      this.participation_trainings_view = new ParticipationTrainingsView("content", "participation_trainings.html");
+      this.evaluation_employees_view = new EvaluationEmployeesView("content", "evaluation_employees.html");
+      this.evaluation_trainings_view = new EvaluationTrainingsView("content", "evaluation_trainings.html");
+      this.evaluation_certificates_view = new EvaluationCertificatesView("content", "evaluation_certificates.html");
       this.detail_view = new DetailView("content", "detail.html");
    }
 
@@ -163,27 +95,27 @@ class Application {
                this.list_employee_view.render();
                break;
             case "list_trainings":
-               // TODO: Hier weitermachen.
+               this.list_training_view.render();
                break;
             case "participation_employees":
-
+               this.participation_employees_view.render();
                break;
             case "participation_trainings":
-
+               this.participation_trainings_view.render();
                break;
             case "evaluation_employees":
-
+               this.evaluation_employees_view.render();
                break;
             case "evaluation_trainings":
-
+               this.evaluation_trainings_view.render();
                break;
             case "evaluation_certificates":
-
+               this.evaluation_certificates_view.render();
                break;
-            case "detail":
+            case "detail": // noch zu entfernen
                this.detail_view.render(data[1]);
                break;
-            case "idBack":
+            case "idBack": // was ist das??
                APPUTIL.event_service.publish("app.cmd", ["list", null]);
                break;
          }

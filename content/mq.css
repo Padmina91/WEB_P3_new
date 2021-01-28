@@ -34,12 +34,13 @@ h1 {
 
 .menu-item {
    padding: 0.5rem;
-   margin: 0.5rem;
 }
 
 .menu-item p {
    display: block;
    text-decoration: underline;
+   color: rgb(72, 0, 189);
+   font-weight: 600;
 }
 
 .menu-item p:hover {
@@ -103,12 +104,7 @@ input.rtable-cell {
    border-radius: 0.3rem;
 }
 
-a:link, a:visited, a:hover, a:active {
-   color: rgb(72, 0, 189);
-   font-weight: 600;
-}
-
-a.pseudo-button, input.pseudo-button, button {
+p.pseudo-button, input.pseudo-button, button {
    font-family: 'Quicksand', sans-serif;
    color: black;
    font-weight: 700;
@@ -120,4 +116,12 @@ a.pseudo-button, input.pseudo-button, button {
    padding: 0.2rem;
    cursor: pointer;
    margin: 2px;
+}
+
+.selected {
+   background-color: rgb(176, 120, 228);
+}
+
+.entry:hover {
+   cursor: pointer;
 }
