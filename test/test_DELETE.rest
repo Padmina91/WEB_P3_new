@@ -1,0 +1,11 @@
+@url = http://127.0.0.1:8080/
+
+###
+// Delete_Req1
+DELETE {{url}}app?id=4&employee=True
+// Mitarbeiter löschen
+
+###
+// Delete_Req2
+DELETE {{url}}app?id=9&training=True
+// Training löschen

@@ -1,1 +1,37 @@
-Platzhalter form_employee.html
+<form id="form" action="/save_employee" method="POST">
+    <input type="hidden" value="#context[0]#" id="id_param" name="id_param" />
+    <div class="row-oriented-table rtable-2-cols">
+        <div class="rtable-cell">Name</div>
+        <input type="text"
+                    class="rtable-cell"
+                    value="#context[1][0]#"
+                    id="name"
+                    name="name" required />
+        <div class="rtable-cell">Vorname</div>
+        <input type="text"
+                    class="rtable-cell"
+                    value="#context[1][1]#"
+                    id="vorname"
+                    name="vorname" required />
+        <div class="rtable-cell">Akademische Grade</div>
+        <input type="text"
+                    class="rtable-cell"
+                    value="#context[1][2]#"
+                    id="akadGrade"
+                    name="akadGrade" required />
+        <div class="rtable-cell">Tätigkeit</div>
+        <input type="text"
+                    class="rtable-cell"
+                    value="#context[1][3]#"
+                    id="taetigkeit"
+                    name="taetigkeit" required />
+    </div>
+    <div class="row-oriented-table rtable-2-cols">
+        <div class="rtable-cell">
+            <input type="submit" id="submit" value="speichern" class="pseudo-button"/>
+        </div>
+        <div class="rtable-cell nested-row-oriented-table">
+            <p class="pseudo-button" id="cancel-button" data-href="list_employees">abbrechen</p>
+        </div>
+    </div>
+</form>

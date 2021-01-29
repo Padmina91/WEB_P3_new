@@ -64,6 +64,22 @@ class Database:
                break
       return data
 
+   def get_employee_with_id(self, id):
+      data = list()
+      for employee in self.employee_data:
+         if str(employee['id']) == str(id):
+            data.append(id)
+            data.append(self.read_employee(id))
+      return data
+
+   def get_training_with_id(self, id):
+      data = list()
+      for training in self.training_data:
+         if str(training['id']) == str(id):
+            data.append(id)
+            data.append(self.read_training(id))
+      return data
+
    def update_employee_entry(self, id, employee_data):
       status = False
       for employee in self.employee_data:
@@ -325,6 +341,33 @@ class Database:
       for employee in self.employee_data:
          if id in employee['Daten'][4]:
             data[5].append([employee['Daten'][0], employee['Daten'][1], employee['Daten'][2], employee['Daten'][3], employee['Daten'][4][id]])
+      return data
+
+   def calculate_employee_with_qual_and_certs(self, id):
+      data = list() # Aufbau: [id, [Nachname, Vorname, akadGrad, Tätigkeit], [Qualifikationen], [Zertifikate], {id: WeiterbildungBezeichnung}]
+      for employee in self.employee_data:
+         if str(employee['id']) == str(id):
+            print("ID stimmt überein, yay!")
+            data.append(id)
+            data.append([employee['Daten'][0], employee['Daten'][1], employee['Daten'][2], employee['Daten'][3], employee['Daten'][4]])
+            data.append(list())
+            data.append(list())
+            for k, v in employee['Daten'][4].items():
+               if v == "erfolgreich beendet":
+                  for training in self.training_data:
+                     if str(training['id']) == str(k):
+                        for qualification in training['Daten'][6]: # Qualifikationen 1 bis n
+                           print("Qualifikation wird angehangen...")
+                           data[2].append(qualification)
+                        if len(training['Daten'][7]) > 0:
+                           print("Zertifikat wird angehangen...")
+                           data[3].append(training['Daten'][7][0]) # Zertifikat 0 oder 1
+                        break
+            break
+      training_names = dict()
+      for training in self.training_data:
+         training_names[training['id']] = training['Daten'][0]
+      data.append(training_names)
       return data
 
 # ---------------------------------------------------------------------------------------------------------------------------------

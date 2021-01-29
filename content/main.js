@@ -56,9 +56,12 @@ class Application {
       APPUTIL.event_service.subscribe(this, "templates.loaded");
       APPUTIL.event_service.subscribe(this, "templates.failed");
       APPUTIL.event_service.subscribe(this, "app.cmd");
-      this.sidebar = new Sidebar();
+      this.sidebar = new Sidebar("sidebar", "sidebar.html");
+      this.home = new Home("content", "home.html");
       this.list_employee_view = new ListEmployeesView("content", "list_employees.html");
       this.list_training_view = new ListTrainingsView("content", "list_trainings.html");
+      this.form_employee = new FormEmployee("content", "form_employee.html");
+      this.show_employee = new ShowEmployee("content", "show_employee.html");
       this.participation_employees_view = new ParticipationEmployeesView("content", "participation_employees.html");
       this.participation_trainings_view = new ParticipationTrainingsView("content", "participation_trainings.html");
       this.evaluation_employees_view = new EvaluationEmployeesView("content", "evaluation_employees.html");
@@ -67,7 +70,7 @@ class Application {
       this.detail_view = new DetailView("content", "detail.html");
    }
 
-   fill_inner_html(tpl_name, html_id) {
+   do_render(tpl_name, html_id) {
       let markup = APPUTIL.template_manager.execute(tpl_name, null);
       let element = document.getElementById(html_id);
       if (element != null) {
@@ -75,27 +78,35 @@ class Application {
       }
    }
 
-   notify (self, message, data) {
+   notify(self, message, data) {
       switch (message) {
       case "templates.failed":
          alert("Vorlagen konnten nicht geladen werden.");
          break;
       case "templates.loaded":
-         this.fill_inner_html("header.html", "head-flex-container");
-         this.fill_inner_html("sidebar.html", "sidebar");
-         this.sidebar.configHandleEvent();
-         this.fill_inner_html("home.html", "content");
+         this.do_render("header.html", "head-flex-container");
+         this.sidebar.do_render();
+         this.home.render();
          break;
       case "app.cmd":
          switch (data[0]) {
             case "home":
-               this.fill_inner_html("home.html", "content");
+               this.home.render();
                break;
             case "list_employees":
                this.list_employee_view.render();
                break;
             case "list_trainings":
                this.list_training_view.render();
+               break;
+            case "edit_employee":
+               this.form_employee.render(data[1]);
+               break;
+            case "add_employee":
+               this.form_employee.render();
+               break;
+            case "show_employee":
+               this.show_employee.render(data[1]);
                break;
             case "participation_employees":
                this.participation_employees_view.render();
@@ -113,7 +124,7 @@ class Application {
                this.evaluation_certificates_view.render();
                break;
             case "detail": // noch zu entfernen
-               this.detail_view.render(data[1]);
+               this.detail_view.render(data[1]); // in data[1] kann die ID drin stehen, wenn ich sie dort rein schreibe
                break;
             case "idBack": // was ist das??
                APPUTIL.event_service.publish("app.cmd", ["list", null]);

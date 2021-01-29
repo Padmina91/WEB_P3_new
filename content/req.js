@@ -19,11 +19,11 @@ APPUTIL.Requester = class {
       return this.request_px('GET', path_spl);
    }
 
-   POST_px (path_spl, data_opl) {
+   POST (path_spl, data_opl) {
       return this.request_px('POST', path_spl, data_opl);
    }
 
-   PUT_px (path_spl, data_opl) {
+   PUT (path_spl, data_opl) {
       return this.request_px('PUT', path_spl, data_opl);
    }
 

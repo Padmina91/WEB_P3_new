@@ -1,1 +1,45 @@
-Platzhalter show_employee.html
+<h1>#context[1][0]#, #context[1][1]#, akademische Grade: #context[1][2]#, Tätigkeit: #context[1][3]#</h1>
+<div class="row-oriented-table rtable-2-cols">
+    <!-- Table Head -->
+    <div class="rtable-head">Weiterbildung Bezeichnung</div>
+    <div class="rtable-head">Status Teilnahme</div>
+@if Object.keys(context[1][4]).length > 0@ <!-- Prüfen, ob ein Dictionary nicht leer ist -->
+    @for key in context[1][4]@ <!-- Loop über Dictionary. Gibt die Keys aus. -->
+        <!-- Table Content -->
+        <div class="rtable-cell">#context[4][key]#</div>
+        <div class="rtable-cell">#context[1][4][key]#</div>
+    @endfor@
+@else@
+    <h3>keine</h3>
+@endif@
+</div>
+<div class="row-oriented-table rtable-1-cols">
+    <!-- Table Head -->
+    <div class="rtable-head">Qualifikationen</div>
+@if context[2].length > 0@
+    @for let i in context[2]@ <!-- Loop über Liste. Gibt die Indizes aus. -->
+        <!-- Table Content -->
+        <div class="rtable-cell">#context[2][i]#</div>
+    @endfor@
+@else@
+    <h3>keine</h3>
+@endif@
+</div>
+<div class="row-oriented-table rtable-1-cols">
+    <!-- Table Head -->
+    <div class="rtable-head">Zertifikate</div>
+@if context[3].length > 0@
+    @for let i in context[3]@
+    <!-- Table Content -->
+    <div class="rtable-cell">#context[3][i]#</div>
+    @endfor@
+@else@
+    <h3>keine</h3>
+@endif@
+</div>
+<!-- Page Foot -->
+<div class="row-oriented-table rtable-1-cols">
+    <div class="rtable-cell no-border nested-row-oriented-table">
+        <p class="pseudo-button" data-href="list_employees">zurück</p>
+    </div>
+</div>

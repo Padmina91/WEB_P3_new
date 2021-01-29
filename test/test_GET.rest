@@ -1,0 +1,46 @@
+@url = http://127.0.0.1:8080/
+
+###
+// Get_Req1
+GET {{url}}
+// Applikations-Start
+
+###
+// Get_Req2
+GET {{url}}app
+// stinknormale GET Request für die Startseite
+
+###
+// Get_Req3
+GET {{url}}app?employee=True
+// Mitarbeiterdaten anfordern
+
+###
+// Get_Req4
+GET {{url}}app?training=True
+// Weiterbildungsdaten anfordern
+
+###
+// Get_Req5
+GET {{url}}app?id=14&employee=True
+// Mitarbeiterdaten von Mikasa Ackermann anfordern
+
+###
+// Get_Req6
+GET {{url}}app?id=3&employee=True
+// Mitarbeiterdaten von Susanne Musterfrau anfordern
+
+###
+// Get_Req7
+GET {{url}}app?id=4&employee=True
+// Mitarbeiterdaten von Max Mustermann anfordern
+
+###
+// Get_Req8
+GET {{url}}app?id=17&employee=True
+// Mitarbeiterdaten von Eren Jäger anfordern
+
+###
+// Get_Req9
+GET {{url}}app?id=17&employee=True&form=True
+// Formulardaten von Eren Jäger anfordern

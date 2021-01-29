@@ -5,12 +5,12 @@ class ListEmployeesView {
    constructor (element, template) {
       this.element = element;
       this.template = template;
-      this.configHandleEvent();
+      //this.configHandleEvent();
    }
 
    render () {
       // Daten anfordern
-      let path = "/app/None/False/True";
+      let path = "/app?employee=True";
       let requester = new APPUTIL.Requester();
       requester.GET(path)
       .then (result => {
@@ -19,18 +19,14 @@ class ListEmployeesView {
          this.configHandleEvent();
       })
       .catch (error => {
-         alert("fetch-error (get): ");
+         alert("fetch-error (get): " + error);
       });
    }
 
    do_render (data = null) {
-      console.log("in der do_render Anfang");
       let markup = APPUTIL.template_manager.execute(this.template, data);
-      console.log("in der do_render 2. Zeile");
       let element = document.getElementById(this.element);
-      console.log("in der do_render 3. Zeile");
       if (element != null) {
-         console.log("in der do_render im if-Block");
          element.innerHTML = markup;
       }
    }
@@ -73,13 +69,27 @@ class ListEmployeesView {
 
    handleClickEvent (event) {
       console.log("handleClickEvent wird ausgeführt...");
-/*    let elx = document.querySelector(".clSelected");
-      if (elx == null) {
-         alert("Bitte zuerst einen Eintrag auswählen!");
+      if(event.target.dataset.href == "add_employee") {
+         console.log("Es wurde auf 'erfassen' geklickt.");
+         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
+         event.preventDefault();
       } else {
-         APPUTIL.event_service.publish("app.cmd", ["detail", elx.id] );
+         let selected_entry = document.getElementsByClassName("selected");
+         if (selected_entry.length == 0) {
+            alert("Bitte zuerst einen Eintrag auswählen!");
+         } else {
+            let all_classes_of_selected_entry = selected_entry[0].classList;
+            let id_of_selected_entry = "";
+            for (let singleClass of all_classes_of_selected_entry) {
+               if (singleClass.startsWith("id")) {
+                  id_of_selected_entry = singleClass.substr(3);
+                  break;
+               }
+            }
+            APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
+            event.preventDefault();
+         }
       }
-      event.preventDefault();*/
    }
 
    handleDeleteEvent(event) {
@@ -97,7 +107,7 @@ class ListEmployeesView {
                   break;
                }
             }
-            let path = "/app/" + id_of_selected_entry;
+            let path = "/app?id=" + id_of_selected_entry + "&employee=True";
             let requester = new APPUTIL.Requester();
             requester.DELETE(path)
             .then (result => {

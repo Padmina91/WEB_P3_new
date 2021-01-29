@@ -2,8 +2,20 @@
 
 class Sidebar {
 
-    constructor () {}
- 
+    constructor (element, template) {
+       this.element = element;
+       this.template = template;
+    }
+
+    do_render() {
+      let markup = APPUTIL.template_manager.execute(this.template, null);
+      let element = document.getElementById(this.element);
+      if (element != null) {
+         element.innerHTML = markup;
+      }
+      this.configHandleEvent();
+   }
+
     configHandleEvent () {
        const links = document.getElementsByClassName("sidebar-link");
        for (let link of links) {
