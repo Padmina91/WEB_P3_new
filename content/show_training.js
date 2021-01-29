@@ -1,6 +1,6 @@
 'use strict'
 
-class ShowEmployee {
+class ShowTraining {
     constructor(element, template) {
         this.element = element;
         this.template = template;
@@ -8,10 +8,11 @@ class ShowEmployee {
 
     render(id) {
         // Daten anfordern
-        let path = "/app?employee=True&id=" + id;
+        let path = "/app?training=True&id=" + id;
         let requester = new APPUTIL.Requester();
         requester.GET(path)
         .then (result => {
+           console.log(result);
            this.do_render(JSON.parse(result));
         })
         .catch (error => {
@@ -36,6 +37,8 @@ class ShowEmployee {
     }
 
     handleReturnEvent(event) {
+        console.log("Zurück wurde geklickt...");
+        console.log(event.target.dataset.href);
         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
         event.preventDefault();
     }

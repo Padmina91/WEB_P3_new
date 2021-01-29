@@ -44,3 +44,8 @@ GET {{url}}app?id=17&employee=True
 // Get_Req9
 GET {{url}}app?id=17&employee=True&form=True
 // Formulardaten von Eren Jäger anfordern
+
+###
+// Get_Req10
+GET {{url}}app?id=18&training=True&form=True
+// Formulardaten von der Weiterbildung 18 anfordern

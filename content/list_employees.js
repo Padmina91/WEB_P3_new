@@ -5,7 +5,6 @@ class ListEmployeesView {
    constructor (element, template) {
       this.element = element;
       this.template = template;
-      //this.configHandleEvent();
    }
 
    render () {
@@ -14,7 +13,6 @@ class ListEmployeesView {
       let requester = new APPUTIL.Requester();
       requester.GET(path)
       .then (result => {
-         console.log(result);
          this.do_render(JSON.parse(result));
          this.configHandleEvent();
       })
@@ -68,9 +66,7 @@ class ListEmployeesView {
    }
 
    handleClickEvent (event) {
-      console.log("handleClickEvent wird ausgeführt...");
       if(event.target.dataset.href == "add_employee") {
-         console.log("Es wurde auf 'erfassen' geklickt.");
          APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
          event.preventDefault();
       } else {
@@ -111,7 +107,6 @@ class ListEmployeesView {
             let requester = new APPUTIL.Requester();
             requester.DELETE(path)
             .then (result => {
-               console.log(JSON.parse(result));
                this.do_render(JSON.parse(result));
                this.configHandleEvent();
             })

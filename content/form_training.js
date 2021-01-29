@@ -1,6 +1,6 @@
 'use strict'
 
-class FormEmployee {
+class FormTraining {
     constructor(element, template) {
         this.element = element;
         this.template = template;
@@ -8,13 +8,14 @@ class FormEmployee {
 
     render(id = null) {
         // Daten anfordern
-        let path = "/app?employee=True&form=True"
+        let path = "/app?training=True&form=True"
         if (id != null) {
             path = path + "&id=" + id;
         }
         let requester = new APPUTIL.Requester();
         requester.GET(path)
         .then (result => {
+           console.log(result);
            this.do_render(JSON.parse(result));
         })
         .catch (error => {
@@ -32,12 +33,18 @@ class FormEmployee {
      }
 
     configHandleEvent() {
+        console.log("configHandleEvent läuft...");
         let cancel_button = document.getElementById("cancel-button");
         cancel_button.addEventListener("click", this.handleCancelEvent);
         let form_element = document.getElementById("form");
         form_element.addEventListener("submit", event => {
+            console.log("Submit...");
             event.preventDefault();
             let formData = new FormData(form_element);
+            for (let key of formData.keys()) {
+                console.log(key);
+                console.log(formData.get(key));
+            }
             if (formData.get("id_param") == "") {
                 this.saveNewData(formData);
             } else {
@@ -56,7 +63,8 @@ class FormEmployee {
         let requester = new APPUTIL.Requester();
         requester.POST(path, formData)
         .then (result => {
-           APPUTIL.event_service.publish("app.cmd", ["list_employees", null]);
+           console.log(result);
+           APPUTIL.event_service.publish("app.cmd", ["list_trainings", null]);
         })
         .catch (error => {
            alert("fetch-error (get): " + error);
@@ -68,7 +76,8 @@ class FormEmployee {
         let requester = new APPUTIL.Requester();
         requester.PUT(path, formData)
         .then (result => {
-           APPUTIL.event_service.publish("app.cmd", ["list_employees", null]);
+           console.log(result);
+           APPUTIL.event_service.publish("app.cmd", ["list_trainings", null]);
         })
         .catch (error => {
            alert("fetch-error (get): " + error);

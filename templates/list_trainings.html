@@ -1,1 +1,42 @@
-Platzhalter list_trainings.html
+<div class="row-oriented-table rtable-6-cols">
+    <!-- Table Head -->
+    <div class="rtable-head">Bezeichnung</div>
+    <div class="rtable-head">Von</div>
+    <div class="rtable-head">Bis</div>
+    <div class="rtable-head">Beschreibung</div>
+    <div class="rtable-head">minimale Teilnehmeranzahl</div>
+    <div class="rtable-head">maximale Teilnehmeranzahl</div>
+<!-- Table Content -->
+@let i@
+@for i = 0; i < context.length; i++@
+    @entry = context[i];@
+    @id = "id-" + entry['id']@
+        <div class="#id# rtable-cell entry">#entry['Daten'][0]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][1]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][2]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][3]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][5]#</div>
+        <div class="#id# rtable-cell entry">#entry['Daten'][4]#</div>
+@endfor@
+</div>
+<!-- Table Foot -->
+<div class="row-oriented-table rtable-7-cols">
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button" data-href="edit_training">ändern</p>
+    </div>
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button delete-button" href="delete_training">löschen</p>
+    </div>
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button" data-href="show_training">anzeigen</p>
+    </div>
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell no-border"></div> <!-- Damit die 3 Buttons nicht so weit auseinander sind -->
+</div>
+<div class="row-oriented-table rtable-1-cols">
+    <div class="rtable-cell no-border nested-row-oriented-table">
+        <p class="pseudo-button" data-href="add_training">erfassen</p>
+    </div>
+</div>

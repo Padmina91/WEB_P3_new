@@ -61,7 +61,9 @@ class Application {
       this.list_employee_view = new ListEmployeesView("content", "list_employees.html");
       this.list_training_view = new ListTrainingsView("content", "list_trainings.html");
       this.form_employee = new FormEmployee("content", "form_employee.html");
+      this.form_training = new FormTraining("content", "form_training.html");
       this.show_employee = new ShowEmployee("content", "show_employee.html");
+      this.show_training = new ShowTraining("content", "show_training.html");
       this.participation_employees_view = new ParticipationEmployeesView("content", "participation_employees.html");
       this.participation_trainings_view = new ParticipationTrainingsView("content", "participation_trainings.html");
       this.evaluation_employees_view = new EvaluationEmployeesView("content", "evaluation_employees.html");
@@ -107,6 +109,15 @@ class Application {
                break;
             case "show_employee":
                this.show_employee.render(data[1]);
+               break;
+            case "edit_training":
+               this.form_training.render(data[1]);
+               break;
+            case "add_training":
+               this.form_training.render();
+               break;
+            case "show_training":
+               this.show_training.render(data[1]);
                break;
             case "participation_employees":
                this.participation_employees_view.render();

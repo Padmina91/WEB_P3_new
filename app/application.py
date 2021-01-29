@@ -48,18 +48,21 @@ class Application:
       if id != 'None' and id != None:
          if employee == "True":
             self.database.delete_employee_entry(id)
-            return_value = json.dumps(self.database.employee_data)
+            return_value = self.database.employee_data
          elif training == "True":
             self.database.delete_training_entry(id)
-            return_value = json.dumps(self.database.training_data)
-      return return_value
+            return_value = self.database.training_data
+      return json.dumps(return_value)
 
-   def POST(self, id_param=None, name=None, vorname=None, akadGrade=None, taetigkeit=None):
+
+   def POST(self, id_param=None, name=None, vorname=None, akadGrade=None, taetigkeit=None, bezeichnung=None, von=None, bis=None, beschreibung=None, maxTeiln=None, minTeiln=None, qualification0=None, zertifikat=None):
       if vorname != None: # es handelt sich um Mitarbeiter-Daten
          self.database.save_employee(id_param, name, vorname, akadGrade, taetigkeit)
       else: # es handelt sich um Weiterbildungs-Daten
-         pass # TODO: implementieren!
+         self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
 
-   def PUT(self, id_param=None, name=None, vorname=None, akadGrade=None, taetigkeit=None):
+   def PUT(self, id_param=None, name=None, vorname=None, akadGrade=None, taetigkeit=None, bezeichnung=None, von=None, bis=None, beschreibung=None, maxTeiln=None, minTeiln=None, qualification0=None, zertifikat=None):
       if vorname != None: # es handelt sich um Mitarbeiter-Daten
          self.database.save_employee(id_param, name, vorname, akadGrade, taetigkeit)
+      else: # es handelt sich um Weiterbildungs-Daten
+         self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
