@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import cherrypy
-import simplejson
 import json
 from .database import Database
 from .view import View
@@ -20,17 +19,13 @@ class Application:
       if form != 'True': # Listen-Daten
          if training == 'True':
             if id == 'None' or id == None:
-               print("Gebe alle Weiterbildungsdaten zurück...")
                return_value = self.database.training_data
             else:
-               print("Gebe Weiterbildungsdaten von Weiterbildung " + id + " zurück...")
                return_value = self.database.read_training(id)
          elif employee == 'True':
             if id == 'None' or id == None:
-               print("Gebe alle Mitarbeiterdaten zurück...")
                return_value = self.database.employee_data
             else:
-               print("Gebe Mitarbeiterdaten von Mitarbeiter " + id + " zurück...")
                return_value = self.database.calculate_employee_with_qual_and_certs(id)
          else:
             return_value = self.database.calculate_home_data()
@@ -59,12 +54,12 @@ class Application:
             return_value = json.dumps(self.database.training_data)
       return return_value
 
-   def POST(self, data=None):
-      cl = cherrypy.request.headers['Content-Length']
-      rawbody = cherrypy.request.body.read(int(cl))
-      body = simplejson.loads(rawbody)
-      print("body: ")
-      print(body)
+   def POST(self, id_param=None, name=None, vorname=None, akadGrade=None, taetigkeit=None):
+      if vorname != None: # es handelt sich um Mitarbeiter-Daten
+         self.database.save_employee(id_param, name, vorname, akadGrade, taetigkeit)
+      else: # es handelt sich um Weiterbildungs-Daten
+         pass # TODO: implementieren!
 
-   def PUT(self, data=None):
-      print(data)
+   def PUT(self, id_param=None, name=None, vorname=None, akadGrade=None, taetigkeit=None):
+      if vorname != None: # es handelt sich um Mitarbeiter-Daten
+         self.database.save_employee(id_param, name, vorname, akadGrade, taetigkeit)

@@ -41,6 +41,10 @@ class FormEmployee {
             console.log("Submit...");
             event.preventDefault();
             let formData = new FormData(form_element);
+            for (let key of formData.keys()) {
+                console.log(key);
+                console.log(formData.get(key));
+            }
             if (formData.get("id_param") == "") {
                 this.saveNewData(formData);
             } else {
@@ -68,8 +72,15 @@ class FormEmployee {
     }
 
     saveOldData(formData) {
-        let id = formData.get("id_param");
-        let path = "/app?id=" + id;
-        // TODO: PUT Request senden
+        let path = "/app/";
+        let requester = new APPUTIL.Requester();
+        requester.PUT(path, formData)
+        .then (result => {
+           console.log(result);
+           APPUTIL.event_service.publish("app.cmd", ["list_employees", null]);
+        })
+        .catch (error => {
+           alert("fetch-error (get): " + error);
+        });
     }
 }

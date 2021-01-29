@@ -36,12 +36,18 @@ APPUTIL.Requester = class {
       if (data_opl != null) {
          // Content-Type mit Header-Objekt explizit bei der Anfrage angeben!
          let headers_o = new Headers();
-         headers_o.append('Content-Type', 'application/json');
+         let body;
+         if (data_opl instanceof FormData) {
+            body = data_opl
+         } else {
+            headers_o.append('Content-Type', 'application/json');
+            body = JSON.stringify(data_opl);
+         }
          f_o = fetch(path_spl, {
-            method: method_spl
-            ,headers: headers_o
-            ,cache: 'no-cache'
-            ,body: JSON.stringify(data_opl)
+            method: method_spl,
+            headers: headers_o,
+            cache: 'no-cache',
+            body: body
          });
       } else {
          f_o = fetch(path_spl, {

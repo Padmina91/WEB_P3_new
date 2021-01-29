@@ -44,7 +44,7 @@ class Database:
 
    def read_employee(self, id=None):
       data = None
-      if id is None:
+      if id == None or id == 'None' or id == '':
          data = self.employee_data
       else:
          for employee in self.employee_data:
@@ -55,7 +55,7 @@ class Database:
 
    def read_training(self, id=None):
       data = None
-      if id is None:
+      if id == None or id == 'None' or id == '':
          data = self.training_data
       else:
          for training in self.training_data:
@@ -181,7 +181,6 @@ class Database:
       status = False
       file_name = str(id) + ".json"
       path_with_file_name = os.path.join(self.employee_dir, file_name)
-      print(path_with_file_name)
       if (os.path.exists(path_with_file_name)):
          os.remove(path_with_file_name)
          self.read_employee_data() # update self.employee_data after deletion
@@ -201,21 +200,21 @@ class Database:
    def save_employee(self, id_param, name, vorname, akadGrade, taetigkeit):
       id = id_param
       data = [name, vorname, akadGrade, taetigkeit]
-      if id != "None":
+      if id != "None" and id != None and id != "":
          employee_data = self.read_employee(id)
          if employee_data is not None:
             data.append(employee_data[4])
             self.update_employee_entry(id, data)
-         else:
-            data.append({})
-            self.new_employee_entry(data)
+      else:
+         data.append(dict())
+         self.new_employee_entry(data)
 
    def save_training(self, id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat):
       id = id_param
       data = [bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, [qualification0], [zertifikat]]
       if data[7][0] == "":
          data[7] = list()
-      if id != "None":
+      if id != "None" and id != "" and id != None:
          training_data = self.read_training(id)
          if training_data is not None:
             data[6] = self.training_data[id][6] # Qualifikationen (1 bis n)
@@ -321,8 +320,6 @@ class Database:
       num_of_trainings_finished = 0
       num_of_trainings_currently_running = 0
       for training in self.training_data:
-         print("in der calculate_home_data. training:")
-         print(training)
          start_date = self.validator.get_date(training['Daten'][1])
          end_date = self.validator.get_date(training['Daten'][2])
          today = self.validator.today
@@ -347,7 +344,6 @@ class Database:
       data = list() # Aufbau: [id, [Nachname, Vorname, akadGrad, Tätigkeit], [Qualifikationen], [Zertifikate], {id: WeiterbildungBezeichnung}]
       for employee in self.employee_data:
          if str(employee['id']) == str(id):
-            print("ID stimmt überein, yay!")
             data.append(id)
             data.append([employee['Daten'][0], employee['Daten'][1], employee['Daten'][2], employee['Daten'][3], employee['Daten'][4]])
             data.append(list())
@@ -357,10 +353,8 @@ class Database:
                   for training in self.training_data:
                      if str(training['id']) == str(k):
                         for qualification in training['Daten'][6]: # Qualifikationen 1 bis n
-                           print("Qualifikation wird angehangen...")
                            data[2].append(qualification)
                         if len(training['Daten'][7]) > 0:
-                           print("Zertifikat wird angehangen...")
                            data[3].append(training['Daten'][7][0]) # Zertifikat 0 oder 1
                         break
             break
