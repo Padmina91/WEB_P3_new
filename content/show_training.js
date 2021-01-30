@@ -12,7 +12,6 @@ class ShowTraining {
         let requester = new APPUTIL.Requester();
         requester.GET(path)
         .then (result => {
-           console.log(result);
            this.do_render(JSON.parse(result));
         })
         .catch (error => {
@@ -37,8 +36,6 @@ class ShowTraining {
     }
 
     handleReturnEvent(event) {
-        console.log("Zurück wurde geklickt...");
-        console.log(event.target.dataset.href);
         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
         event.preventDefault();
     }

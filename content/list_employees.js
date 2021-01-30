@@ -103,7 +103,7 @@ class ListEmployeesView {
                   break;
                }
             }
-            let path = "/app?id=" + id_of_selected_entry + "&employee=True";
+            let path = "/app?id_employee=" + id_of_selected_entry;
             let requester = new APPUTIL.Requester();
             requester.DELETE(path)
             .then (result => {

@@ -2,10 +2,15 @@
 
 ###
 // Delete_Req1
-DELETE {{url}}app?id=4&employee=True
+DELETE {{url}}app?id_employee=4
 // Mitarbeiter löschen
 
 ###
 // Delete_Req2
-DELETE {{url}}app?id=9&training=True
+DELETE {{url}}app?id_training=9
 // Training löschen
+
+###
+// Delete_Req3
+DELETE {{url}}app?id_training=6&index_qualification=1
+// Qualifikation mit Index 1 von der Weiterbildung 6 löschen

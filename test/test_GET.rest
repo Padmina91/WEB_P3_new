@@ -47,5 +47,25 @@ GET {{url}}app?id=17&employee=True&form=True
 
 ###
 // Get_Req10
-GET {{url}}app?id=18&training=True&form=True
-// Formulardaten von der Weiterbildung 18 anfordern
+GET {{url}}app?id=24&training=True&form=True
+// Formulardaten von der Weiterbildung 24 anfordern
+
+###
+// Get_Req11
+GET {{url}}app?training=True&form=True
+// leere Weiterbildungs-Formulardaten anfordern
+
+###
+// Get_Req12
+GET {{url}}app?employee=True&form=True
+// leere Mitarbeiter-Formulardaten anfordern
+
+###
+// Get_Req13
+GET {{url}}app?form=True&id=6&index_qualification=2
+// Qualifikations-Formulardaten von Weiterbildung 6 mit Index 2 anfordern
+
+###
+// Get_Req14
+GET {{url}}app?form=True&id=6
+// leere Qualifikations-Formulardaten von Weiterbildung 6 anfordern

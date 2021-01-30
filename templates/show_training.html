@@ -1,1 +1,60 @@
-Platzhalter show_training.html
+<!--
+[
+ "Abgeschlossene Weiterbildung 2",
+ "2020-12-21",
+ "2020-12-22",
+ [],
+ ["Eine abgeschlossene Qualifikation"],
+ [
+  [
+   "Ackermann",
+   "Mikasa",
+   "Prof. Dr. Dr.",
+   "Titanenforscherin",
+   "erfolgreich beendet"
+  ]
+ ]
+] -->
+<h2>Weiterbildung "#context[0]#", vom #context[1]# bis #context[2]#</h2>
+@if context[3].length > 0@
+    <h3>Zertifikat: #context[3][0]#</h3>
+@else@
+    <h3>Zertifikat: -</h3>
+@endif@
+@if context[4].length == 1@
+    <h3>Qualifikation:</h3>
+@else@
+    <h3>Qualifikationen:</h3>
+@endif@
+    <ul>
+        @for let qualification in context[4]@
+        <li>#context[4][qualification]#</li>
+        @endfor@
+    </ul>
+<h2>Teilnahmen:</h2>
+<div class="row-oriented-table rtable-5-cols">
+    <!-- Table Head -->
+    <div class="rtable-head">Name</div>
+    <div class="rtable-head">Vorname</div>
+    <div class="rtable-head">Akademische Grade</div>
+    <div class="rtable-head">Tätigkeit</div>
+    <div class="rtable-head">Teilnahmestatus</div>
+    <!-- Table Content -->
+    @if context[5].length > 0@
+        @for let i in context[5]@
+            <div class="rtable-cell">#context[5][i][0]#</div>
+            <div class="rtable-cell">#context[5][i][1]#</div>
+            <div class="rtable-cell">#context[5][i][2]#</div>
+            <div class="rtable-cell">#context[5][i][3]#</div>
+            <div class="rtable-cell">#context[5][i][4]#</div>
+        @endfor@
+    @else@
+        <h3>keine</h3>
+    @endif@
+</div>
+<!-- Table Foot -->
+<div class="row-oriented-table rtable-1-cols">
+    <div class="rtable-cell no-border nested-row-oriented-table">
+        <p class="pseudo-button" data-href="list_trainings">zurück</p>
+    </div>
+</div>

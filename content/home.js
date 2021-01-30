@@ -12,7 +12,6 @@ class Home {
         let requester = new APPUTIL.Requester();
         requester.GET(path)
         .then (result => {
-            console.log(result)
             this.do_render(JSON.parse(result));
         })
         .catch (error => {

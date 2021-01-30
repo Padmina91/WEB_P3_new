@@ -80,6 +80,17 @@ class Database:
             data.append(self.read_training(id))
       return data
 
+   def get_qualification_data(self, id_training, index):
+      return_data = [id_training, '', '', '', index, ''] # [id_training, bezeichnung_training, von, bis, index_qualification, bezeichnung_qualification]
+      for training in self.training_data:
+         if str(training['id']) == str(id_training):
+            return_data[1] = training['Daten'][0] # bezeichnung_training
+            return_data[2] = training['Daten'][1] # von
+            return_data[3] = training['Daten'][2] # bis
+            return_data[5] = training['Daten'][6][int(index)] # bezeichnung_qualification
+            break
+      return return_data
+
    def update_employee_entry(self, id, employee_data):
       status = False
       for employee in self.employee_data:
@@ -100,19 +111,30 @@ class Database:
             break
       return status
 
-   def save_qualification(self, id, index, bezeichnung):
+   def delete_qualification(self, id, index):
+      status = False
+      index = int(index)
+      for training in self.training_data:
+         if str(training['id']) == str(id):
+            if len(training['Daten'][6]) > index:
+               del training['Daten'][6][index]
+               self.save_training_data(id)
+               status = True
+            break
+      return status
+
+   def save_qualification(self, id, bezeichnung, index=None):
       status = False
       for training in self.training_data:
          if str(training['id']) == str(id):
-            qualifications = training[6]
-            if len(qualifications) >= int(index):
-               if int(index) == len(qualifications):
-                  qualifications.append(bezeichnung) # neue Qualifikation hinzufügen
-               else:
-                  qualifications[int(index)] = bezeichnung # bereits vorhandene Qualifikation updaten
-               self.save_training_data(id)
-               status = True
-               break
+            qualifications = training['Daten'][6]
+            if index != None and int(index) < len(qualifications):
+               qualifications[int(index)] = bezeichnung # bereits vorhandene Qualifikation updaten
+            else:
+               qualifications.append(bezeichnung) # neue Qualifikation hinzufügen
+            self.save_training_data(id)
+            status = True
+            break
       return status
 
    def register_for_training(self, id_employee, id_training):
@@ -210,14 +232,16 @@ class Database:
          self.new_employee_entry(data)
 
    def save_training(self, id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat):
-      id = id_param
+      id = -1
+      if id_param != "":
+         id = int(id_param)
       data = [bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, [qualification0], [zertifikat]]
       if data[7][0] == "":
          data[7] = list()
-      if id != "None" and id != "" and id != None:
+      if id != -1:
          training_data = self.read_training(id)
          if training_data is not None:
-            data[6] = self.training_data[id][6] # Qualifikationen (1 bis n)
+            data[6] = training_data[6] # Qualifikationen (1 bis n)
             data[6][0] = qualification0
             self.update_training_entry(id, data)
       else:
@@ -333,7 +357,7 @@ class Database:
       return data
 
    def calculate_training_data(self, id):
-      training_data = self.read_training[id]
+      training_data = self.read_training(id)
       data = [training_data[0], training_data[1], training_data[2], training_data[7], training_data[6], list()]
       for employee in self.employee_data:
          if id in employee['Daten'][4]:
@@ -366,11 +390,23 @@ class Database:
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
+   def get_qualification_default(self, id):
+      return_data = [id] # [id_training, bezeichnung_training, von, bis, index_qualification, bezeichnung_qualification]
+      for training in self.training_data:
+         if str(training['id']) == str(id):
+            return_data.append(training['Daten'][0]) # Bezeichnung Training
+            return_data.append(training['Daten'][1]) # von
+            return_data.append(training['Daten'][2]) # bis
+            return_data.append(str(len(training['Daten'][6]))) # neuer Index
+            return_data.append('') # Bezeichnung Qualification
+            break
+      return return_data
+
    def get_employee_default(self):
-      return ['', '', '', '']
+      return ['', ['', '', '', '']]
 
    def get_training_default(self):
-      return ['', '', '', '', '', '', [], []]
+      return ['', ['', '', '', '', '', '', [], []]]
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 

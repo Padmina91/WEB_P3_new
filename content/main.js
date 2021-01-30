@@ -64,6 +64,7 @@ class Application {
       this.form_training = new FormTraining("content", "form_training.html");
       this.show_employee = new ShowEmployee("content", "show_employee.html");
       this.show_training = new ShowTraining("content", "show_training.html");
+      this.form_qualification = new FormQualification("content", "form_qualification.html")
       this.participation_employees_view = new ParticipationEmployeesView("content", "participation_employees.html");
       this.participation_trainings_view = new ParticipationTrainingsView("content", "participation_trainings.html");
       this.evaluation_employees_view = new EvaluationEmployeesView("content", "evaluation_employees.html");
@@ -118,6 +119,12 @@ class Application {
                break;
             case "show_training":
                this.show_training.render(data[1]);
+               break;
+            case "edit_qualification":
+               this.form_qualification.render(data[1]);
+               break;
+            case "add_qualification":
+               this.form_qualification.render(data[1]);
                break;
             case "participation_employees":
                this.participation_employees_view.render();

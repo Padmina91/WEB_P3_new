@@ -1,1 +1,22 @@
-Platzhalter form_qualification.html
+<h1>#context[1]#, von #context[2]# bis #context[3]#</h1>
+<h2>Qualifikation Nummer #parseInt(context[4])+1#:</h2>
+<form action="save_qualification" method="POST" id="form">
+    <input type="hidden" value="#context[0]#" id="id_param" name="id_param" />
+    <input type="hidden" value="#context[4]#" id="index" name="index" />
+    <div class="row-oriented-table rtable-2-cols">
+        <div class="rtable-cell">Bezeichnung</div>
+        <input type="text"
+                    class="rtable-cell"
+                    value="#context[5]#"
+                    id="bezeichnung"
+                    name="bezeichnung" required />
+    </div>
+    <div class="row-oriented-table rtable-2-cols">
+        <div class="rtable-cell no-border">
+            <input type="submit" id="submit" value="speichern" class="pseudo-button"/>
+        </div>
+        <div class="rtable-cell no-border nested-row-oriented-table">
+            <p class="pseudo-button" id="cancel-button" data-href="edit_training">abbrechen</p>
+        </div>
+    </div>
+</form>

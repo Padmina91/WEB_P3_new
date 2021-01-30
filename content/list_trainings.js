@@ -13,7 +13,6 @@ class ListTrainingsView {
       let requester = new APPUTIL.Requester();
       requester.GET(path)
       .then (result => {
-         console.log(result);
          this.do_render(JSON.parse(result));
          this.configHandleEvent();
       })
@@ -67,9 +66,8 @@ class ListTrainingsView {
    }
 
    handleClickEvent (event) {
-      console.log("handleClickEvent wird ausgeführt...");
       if(event.target.dataset.href == "add_training") {
-         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
+         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
          event.preventDefault();
       } else {
          let selected_entry = document.getElementsByClassName("selected");
@@ -84,7 +82,7 @@ class ListTrainingsView {
                   break;
                }
             }
-            APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
+            APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]);
             event.preventDefault();
          }
       }
@@ -105,11 +103,10 @@ class ListTrainingsView {
                   break;
                }
             }
-            let path = "/app?id=" + id_of_selected_entry + "&training=True";
+            let path = "/app?id_training=" + id_of_selected_entry;
             let requester = new APPUTIL.Requester();
             requester.DELETE(path)
             .then (result => {
-               console.log(JSON.parse(result));
                this.do_render(JSON.parse(result));
                this.configHandleEvent();
             })

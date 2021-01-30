@@ -52,7 +52,7 @@
                         name="qualification0" required />
         @endif@
         <div class="rtable-cell">Zertifikat (optional)</div>
-        @if context[1][7].lenth > 0@
+        @if context[1][7].length > 0@
             <input type="text"
                         class="rtable-cell"
                         value="#context[1][7][0]#"
@@ -66,36 +66,42 @@
                         name="zertifikat" />
         @endif@
     </div>
-    @if "#context[0]# != null && "#context[0]# != ''@
+    @if context[1][6].length > 1@
         <div class="row-oriented-table rtable-1-cols">
             <!-- Table Head -->
             <div class="rtable-head">Weitere Qualifikationen</div>
             <!-- Table Content -->
             @for let i in context[1][6]@
                 @if i != 0@
-            <!------------------------------------- hier weiter morgen --------------------------------------------------------------------->
-                    <div class="rtable-cell">#context[1][6][i]#</div>
-                % endif
-            % endfor
+                    @index = "index-" + i@
+                    <div class="#index# rtable-cell entry">#context[1][6][i]#</div>
+                @endif@
+            @endfor@
         </div>
-
-        <div class="rtable-cell nested-row-oriented-table">
-            <a class="pseudo-button nested-cell" href="/edit_qualification/${key}/${i}">ändern</a> <!-- TODO: Ändern-Formular implementieren -->
-            <a class="pseudo-button nested-cell delete-button" href="/delete_qualification/${key}/${i}">löschen</a> <!-- TODO: löschen implementieren -->
+        <div class="row-oriented-table rtable-4-cols">
+            <div class="rtable-cell no-border"></div> <!-- Damit die 2 Buttons nicht so weit auseinander sind -->
+            <div class="rtable-cell no-border nested-row-oriented-table">
+                <p class="pseudo-button" id="edit-qualification" data-href="edit_qualification">ändern</p>
+            </div>
+            <div class="rtable-cell no-border nested-row-oriented-table">
+                <p class="pseudo-button delete-button" data-href="delete_qualification">löschen</p>
+            </div>
+            <div class="rtable-cell no-border"></div> <!-- Damit die 2 Buttons nicht so weit auseinander sind -->
         </div>
-
+    @endif@
+    @if context[0] != "" && context[0] != null@
         <div class="row-oriented-table rtable-1-cols">
-            <div class="rtable-cell">
-                <a href="/add_qualification/${key}" class="pseudo-button">weitere Qualifikation erfassen</a>
+            <div class="rtable-cell no-border nested-row-oriented-table">
+                <p data-href="add_qualification" class="pseudo-button" id="add-qualification">weitere Qualifikation erfassen</p>
             </div>
         </div>
-    % endif
+    @endif@
     <div class="row-oriented-table rtable-2-cols">
         <div class="rtable-cell no-border">
-            <a href="/list_trainings" class="pseudo-button submit-button">speichern</a>
+            <input type="submit" id="submit" value="speichern" class="pseudo-button"/>
         </div>
-        <div class="rtable-cell no-border">
-            <a class="pseudo-button" href="/list_trainings">abbrechen</a>
+        <div class="rtable-cell no-border nested-row-oriented-table">
+            <p class="pseudo-button" id="cancel-button" data-href="list_trainings">abbrechen</p>
         </div>
     </div>
 </form>
