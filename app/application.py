@@ -14,9 +14,9 @@ class Application:
       self.view = View()
 
 
-   def GET(self, id=None, training=False, employee=False, form=False, index_qualification=None):
+   def GET(self, id=None, training=False, employee=False, certificate=False, form=False, index_qualification=None, evaluation=False):
       return_value = ''
-      if form != 'True': # Listen-Daten
+      if form != 'True' and evaluation != 'True': # Listen-Daten
          if training == 'True':
             if id == 'None' or id == None:
                return_value = self.database.training_data
@@ -29,7 +29,7 @@ class Application:
                return_value = self.database.calculate_employee_with_qual_and_certs(id)
          else:
             return_value = self.database.calculate_home_data()
-      else: # Formular-Daten
+      elif form == 'True': # Formular-Daten
          if training == 'True':
             if id == 'None' or id == None:
                return_value = self.database.get_training_default()
@@ -45,6 +45,13 @@ class Application:
                return_value = self.database.get_qualification_default(id)
             else:
                return_value = self.database.get_qualification_data(id, index_qualification)
+      else: # Auswertungs-Daten
+         if training == 'True':
+            return_value = self.database.calculate_evaluation_trainings()
+         elif employee == 'True':
+            return_value = self.database.calculate_evaluation_employees()
+         elif certificate == 'True': # Zertifikate
+            return_value = self.database.calculate_evaluation_certificates()
       return json.dumps(return_value)
 
 

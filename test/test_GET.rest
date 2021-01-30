@@ -69,3 +69,15 @@ GET {{url}}app?form=True&id=6&index_qualification=2
 // Get_Req14
 GET {{url}}app?form=True&id=6
 // leere Qualifikations-Formulardaten von Weiterbildung 6 anfordern
+
+###
+// Get_Req15
+GET {{url}}app?evaluation=True&training=True
+
+###
+// Get_Req16
+GET {{url}}app?evaluation=True&employee=True
+
+###
+// Get_Req17
+GET {{url}}app?evaluation=True&certificate=True

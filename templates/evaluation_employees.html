@@ -1,1 +1,25 @@
-Platzhalter evaluation_employees.html
+@for let i in context@
+    <ul>
+        <li>
+            <h2>#context[i][0]#, #context[i][1]#, #context[i][2]#, #context[i][3]#</h2>
+        </li>
+    </ul>
+    @if context[i][4].length > 0@
+        <div class="row-oriented-table rtable-4-cols">
+            <!-- Table Head -->
+            <div class="rtable-head">Bezeichnung</div>
+            <div class="rtable-head">Von</div>
+            <div class="rtable-head">Bis</div>
+            <div class="rtable-head">Teilnahmestatus</div>
+            <!-- Table Content -->
+            @for let j in context[i][4]@
+                <div class="rtable-cell">#context[i][4][j][0]#</div>
+                <div class="rtable-cell">#context[i][4][j][1]#</div>
+                <div class="rtable-cell">#context[i][4][j][2]#</div>
+                <div class="rtable-cell">#context[i][4][j][3]#</div>
+            @endfor@
+        </div>
+    @else@
+        <h3>keine Weiterbildungen</h3>
+    @endif@
+@endfor@

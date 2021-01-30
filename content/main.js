@@ -67,9 +67,9 @@ class Application {
       this.form_qualification = new FormQualification("content", "form_qualification.html")
       this.participation_employees_view = new ParticipationEmployeesView("content", "participation_employees.html");
       this.participation_trainings_view = new ParticipationTrainingsView("content", "participation_trainings.html");
-      this.evaluation_employees_view = new EvaluationEmployeesView("content", "evaluation_employees.html");
-      this.evaluation_trainings_view = new EvaluationTrainingsView("content", "evaluation_trainings.html");
-      this.evaluation_certificates_view = new EvaluationCertificatesView("content", "evaluation_certificates.html");
+      this.evaluation_employees = new EvaluationEmployees("content", "evaluation_employees.html");
+      this.evaluation_trainings = new EvaluationTrainings("content", "evaluation_trainings.html");
+      this.evaluation_certificates = new EvaluationCertificates("content", "evaluation_certificates.html");
       this.detail_view = new DetailView("content", "detail.html");
    }
 
@@ -133,13 +133,13 @@ class Application {
                this.participation_trainings_view.render();
                break;
             case "evaluation_employees":
-               this.evaluation_employees_view.render();
+               this.evaluation_employees.render();
                break;
             case "evaluation_trainings":
-               this.evaluation_trainings_view.render();
+               this.evaluation_trainings.render();
                break;
             case "evaluation_certificates":
-               this.evaluation_certificates_view.render();
+               this.evaluation_certificates.render();
                break;
             case "detail": // noch zu entfernen
                this.detail_view.render(data[1]); // in data[1] kann die ID drin stehen, wenn ich sie dort rein schreibe

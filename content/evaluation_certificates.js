@@ -1,47 +1,30 @@
 'use strict'
 
-class EvaluationCertificatesView {
-    constructor(element, template) {
-        this.element = element;
-        this.template = template;
-        this.configHandleEvent();
-    }
+class EvaluationCertificates {
+   constructor(element, template) {
+      this.element = element;
+      this.template = template;
+   }
 
-    render () {
-        this.do_render();
+   render () {
+      // Daten anfordern
+      let path = "/app?evaluation=True&certificate=True"
+      let requester = new APPUTIL.Requester();
+      requester.GET(path)
+      .then (result => {
+         console.log(result);
+         this.do_render(JSON.parse(result));
+      })
+      .catch (error => {
+         alert("fetch-error (get): " + error);
+      });
     }
     
-    do_render (data = null) {
-        let markup = APPUTIL.template_manager.execute(this.template, data);
-        let element = document.getElementById(this.element);
-        if (element != null) {
-           element.innerHTML = markup;
-        }
-     }
-  
-     configHandleEvent () {
-        let element = document.getElementById(this.element);
-        if (element != null) {
-           element.addEventListener("click", this.handleEvent);
-        }
-     }
-  
-     handleEvent (event) {
-        if (event.target.tagName.toUpperCase() == "TD") {
-           let elx = document.querySelector(".clSelected");
-           if (elx != null) {
-              elx.classList.remove("clSelected");
-           }
-           event.target.parentNode.classList.add("clSelected");
-           event.preventDefault();
-        } else if (event.target.id == "idShowListEntry") {
-           let elx = document.querySelector(".clSelected");
-           if (elx == null) {
-              alert("Bitte zuerst einen Eintrag auswählen!");
-           } else {
-              APPUTIL.event_service.publish("app.cmd", ["detail", elx.id] );
-           }
-           event.preventDefault();
-        }
-     }
-  }
+   do_render (data = null) {
+      let markup = APPUTIL.template_manager.execute(this.template, data);
+      let element = document.getElementById(this.element);
+      if (element != null) {
+         element.innerHTML = markup;
+      }
+   }
+}
