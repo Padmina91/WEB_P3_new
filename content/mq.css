@@ -118,10 +118,10 @@ p.pseudo-button, input.pseudo-button, button {
    margin: 2px;
 }
 
-.selected {
+.selected, .selected-1, .selected-2 {
    background-color: rgb(176, 120, 228);
 }
 
-.entry:hover {
+.entry:hover, .entry-1:hover, .entry-2:hover {
    cursor: pointer;
 }

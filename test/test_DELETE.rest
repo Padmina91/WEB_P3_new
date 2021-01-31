@@ -7,7 +7,7 @@ DELETE {{url}}app?id_employee=4
 
 ###
 // Delete_Req2
-DELETE {{url}}app?id_training=9
+DELETE {{url}}app?id_training=8
 // Training löschen
 
 ###

@@ -1,1 +1,61 @@
-Platzhalter participation_employee.html
+<h1>
+    #context[1][0]#, #context[1][1]#, akademische Grade: #context[1][2]#, Tätigkeit:#context[1][3]#
+</h1>
+@if context[2].length > 0@
+    <h2>
+        Weiterbildungen, zu denen eine Anmeldung möglich ist
+    </h2>
+    <div class="row-oriented-table rtable-4-cols">
+         <!-- Table Head -->
+        <div class="rtable-head">Bezeichnung</div>
+        <div class="rtable-head">Von</div>
+        <div class="rtable-head">Bis</div>
+        <div class="rtable-head">Beschreibung</div>
+        <!-- Table Content -->
+        @for i in context[2]@
+            @entry = context[2][i]@
+            @id = "id-" + entry[0]@
+            <div class="#id# rtable-cell entry-1">#entry[1]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[2]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[3]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[4]#</div>
+        @endfor@
+    </div>
+    <div class="row-oriented-table rtable-1-cols"></div>
+        <div class="rtable-cell nested-row-oriented-table no-border">
+            <p class="pseudo-button" id="register-button" data-href="participation_employee">zu Weiterbildung anmelden</p>
+        </div>
+    </div>
+@endif@
+@if context[3].length > 0@
+    <h2>
+        Angemeldete Weiterbildungen
+    </h2>
+    <div class="row-oriented-table rtable-4-cols">
+        <!-- Table Head -->
+        <div class="rtable-head">Bezeichnung</div>
+        <div class="rtable-head">Von</div>
+        <div class="rtable-head">Bis</div>
+        <div class="rtable-head">Beschreibung</div>
+        <!-- Table Content -->
+        @for i in context[3]@
+            @entry = context[3][i]@
+            @id = "id-" + entry[0]@
+            <div class="#id# rtable-cell entry-2">#entry[1]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[2]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[3]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[4]#</div>
+        @endfor@
+    </div>
+    <div class="row-oriented-table rtable-1-cols"></div>
+        <div class="rtable-cell nested-row-oriented-table no-border">
+            <p class="pseudo-button" id="cancel-button" data-href="participation_employee">Anmeldung stornieren</p>
+        </div>
+    </div>
+@endif@
+<!-- Table Foot -->
+<div class="row-oriented-table rtable-1-cols">
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button" id="back-button" data-href="participation_employees">zurück</p>
+    </div>
+</div>

@@ -1,15 +1,16 @@
 'use strict'
 
-class ParticipationTrainings {
+class ParticipationEmployee {
 
    constructor (element, template) {
       this.element = element;
       this.template = template;
    }
 
-   render () {
+   render (id) {
+      this.employee_id = id;
       // Daten anfordern
-      let path = "/app?training=True&participation=True";
+      let path = "/app?participation=True&employee=True&id=" + this.employee_id;
       let requester = new APPUTIL.Requester();
       requester.GET(path)
       .then (result => {
@@ -30,7 +31,6 @@ class ParticipationTrainings {
    }
 
    configHandleEvent () {
-      console.log("configHandleEvent läuft...");
       let entries1 = document.getElementsByClassName("entry-1");
       for (let entry of entries1) {
          entry.addEventListener("click", this.handleSelectEvent1);
@@ -39,14 +39,16 @@ class ParticipationTrainings {
       for (let entry of entries2) {
          entry.addEventListener("click", this.handleSelectEvent2);
       }
-      let detail_onoing_button = document.getElementById("detail-ongoing");
-      if (detail_onoing_button != null) {
-         detail_onoing_button.addEventListener("click", this.handleDetailEvent1.bind(this));
+      let register_button = document.getElementById("register-button");
+      if (register_button != null) {
+         register_button.addEventListener("click", this.handleRegisterEvent.bind(this));
       }
-      let detail_finished_button = document.getElementById("detail-finished");
-      if (detail_finished_button != null) {
-         detail_finished_button.addEventListener("click", this.handleDetailEvent2.bind(this));
+      let cancel_button = document.getElementById("cancel-button");
+      if (cancel_button != null) {
+         cancel_button.addEventListener("click", this.handleCancelEvent.bind(this));
       }
+      let back_button = document.getElementById("back-button");
+      back_button.addEventListener("click", this.handleBackEvent);
    }
 
    handleSelectEvent1(event) {
@@ -91,7 +93,7 @@ class ParticipationTrainings {
       }
    }
 
-   handleDetailEvent1(event) {
+   handleRegisterEvent(event) {
       let selected_entry = document.getElementsByClassName("selected-1");
       if (selected_entry.length == 0) {
          alert("Bitte zuerst einen Eintrag auswählen!");
@@ -104,11 +106,11 @@ class ParticipationTrainings {
                break;
             }
          }
-         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]);
+         this.registerAndReload(event, id_of_selected_entry);
       }
    }
 
-   handleDetailEvent2(event) {
+   handleCancelEvent(event) {
       let selected_entry = document.getElementsByClassName("selected-2");
       if (selected_entry.length == 0) {
          alert("Bitte zuerst einen Eintrag auswählen!");
@@ -121,7 +123,35 @@ class ParticipationTrainings {
                break;
             }
          }
-         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]);
+         this.cancelAndReload(event, id_of_selected_entry);
       }
+   }
+
+   handleBackEvent(event) {
+      APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, this.employee_id]);
+   }
+
+   registerAndReload(event, training_id) {
+      let path = "/app?register=True&id_training=" + training_id + "&id_employee=" + this.employee_id;
+      let requester = new APPUTIL.Requester();
+      requester.PUT(path)
+      .then (result => {
+         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, this.employee_id]);
+      })
+      .catch (error => {
+         alert("fetch-error (get): " + error);
+      });
+   }
+
+   cancelAndReload(event, training_id) {
+      let path = "/app?cancel=True&id_training=" + training_id + "&id_employee=" + this.employee_id;
+      let requester = new APPUTIL.Requester();
+      requester.PUT(path)
+      .then (result => {
+         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, this.employee_id]);
+      })
+      .catch (error => {
+         alert("fetch-error (get): " + error);
+      });
    }
 }

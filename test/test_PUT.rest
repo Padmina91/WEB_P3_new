@@ -1,2 +1,11 @@
 @url = http://127.0.0.1:8080/
 
+###
+// Put_Req1
+PUT {{url}}app?register=True&id_employee=7&id_training=24
+// Hansi möchte Japanisch lernen
+
+###
+// Put_Req1
+PUT {{url}}app?cancel=True&id_employee=7&id_training=24
+// Hansi ist leider zu doof zum Japanisch lernen

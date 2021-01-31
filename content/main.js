@@ -1,54 +1,4 @@
-//------------------------------------------------------------------------------
-// rev. 1, 18.12.2020, Bm
-// rev. 0, 21.11.2018, Bm
-//------------------------------------------------------------------------------
-// hier zur Vereinfachung (!) die Klassen in einer Datei
-
 'use strict'
-
-class DetailView {
-
-   constructor (element, template) {
-      this.element = element;
-      this.template = template;
-   }
-
-   render (id) {
-      // Daten anfordern
-      let path = "/app/" + id;
-      let requester = new APPUTIL.Requester();
-      requester.GET(path)
-      .then (result => {
-            this.do_render(JSON.parse(result));
-      })
-      .catch (error => {
-         alert("fetch-error (get)");
-      });
-   }
-
-   do_render (data) {
-      let markup = APPUTIL.template_manager.execute(this.template, data);
-      let element = document.querySelector(this.element);
-      if (element != null) {
-         element.innerHTML = markup;
-         this.configHandleEvent();
-      }
-   }
-
-   configHandleEvent () {
-      let element = document.querySelector("form");
-      if (element != null) {
-         element.addEventListener("click", this.handleEvent);
-      }
-   }
-
-   handleEvent (event) {
-      if (event.target.id == "idBack") {
-         APPUTIL.event_service.publish("app.cmd", ["idBack", null]);
-         event.preventDefault();
-      }
-   }
-}
 
 class Application {
 
@@ -65,12 +15,14 @@ class Application {
       this.show_employee = new ShowEmployee("content", "show_employee.html");
       this.show_training = new ShowTraining("content", "show_training.html");
       this.form_qualification = new FormQualification("content", "form_qualification.html")
-      this.participation_employees_view = new ParticipationEmployeesView("content", "participation_employees.html");
-      this.participation_trainings_view = new ParticipationTrainingsView("content", "participation_trainings.html");
+      this.participation_employees = new ParticipationEmployees("content", "participation_employees.html");
+      this.participation_employee = new ParticipationEmployee("content", "participation_employee.html");
+      this.participation_trainings = new ParticipationTrainings("content", "participation_trainings.html");
+      this.participation_training_ongoing = new ParticipationTrainingOngoing("content", "participation_training_ongoing.html");
+      this.participation_training_finished = new ParticipationTrainingFinished("content", "participation_training_finished.html");
       this.evaluation_employees = new EvaluationEmployees("content", "evaluation_employees.html");
       this.evaluation_trainings = new EvaluationTrainings("content", "evaluation_trainings.html");
       this.evaluation_certificates = new EvaluationCertificates("content", "evaluation_certificates.html");
-      this.detail_view = new DetailView("content", "detail.html");
    }
 
    do_render(tpl_name, html_id) {
@@ -127,10 +79,19 @@ class Application {
                this.form_qualification.render(data[1]);
                break;
             case "participation_employees":
-               this.participation_employees_view.render();
+               this.participation_employees.render();
+               break;
+            case "participation_employee":
+               this.participation_employee.render(data[1]);
                break;
             case "participation_trainings":
-               this.participation_trainings_view.render();
+               this.participation_trainings.render();
+               break;
+            case "participation_training_ongoing":
+               this.participation_training_ongoing.render(data[1]);
+               break;
+            case "participation_training_finished":
+               this.participation_training_finished.render(data[1]);
                break;
             case "evaluation_employees":
                this.evaluation_employees.render();
@@ -140,12 +101,6 @@ class Application {
                break;
             case "evaluation_certificates":
                this.evaluation_certificates.render();
-               break;
-            case "detail": // noch zu entfernen
-               this.detail_view.render(data[1]); // in data[1] kann die ID drin stehen, wenn ich sie dort rein schreibe
-               break;
-            case "idBack": // was ist das??
-               APPUTIL.event_service.publish("app.cmd", ["list", null]);
                break;
          }
          break;

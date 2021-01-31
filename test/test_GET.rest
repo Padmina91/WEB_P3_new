@@ -81,3 +81,17 @@ GET {{url}}app?evaluation=True&employee=True
 ###
 // Get_Req17
 GET {{url}}app?evaluation=True&certificate=True
+
+###
+// Get_Req18
+GET {{url}}app?participation=True&employee=True&id=14
+
+###
+// Get_Req19
+GET {{url}}app?training=True&participation=True
+// Teilnahme-Daten von allen Weiterbildungen anfordern
+
+###
+// Get_Req20
+GET {{url}}app?training=True&participation=True&id=8
+// Teilnahme-Daten von Weiterbildung 8 anfordern

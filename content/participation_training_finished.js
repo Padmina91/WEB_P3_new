@@ -1,15 +1,16 @@
 'use strict'
 
-class ParticipationEmployees {
+class ParticipationTrainingFinished {
 
    constructor (element, template) {
       this.element = element;
       this.template = template;
    }
 
-   render () {
+   render (id) {
+      this.training_id = id
       // Daten anfordern
-      let path = "/app?employee=True";
+      let path = "/app?training=True&participation=True&id=" + this.training_id;
       let requester = new APPUTIL.Requester();
       requester.GET(path)
       .then (result => {
@@ -29,15 +30,25 @@ class ParticipationEmployees {
       }
    }
 
-   configHandleEvent () {
+   configHandleEvent() {
+      let back_button = document.getElementById("back");
+      back_button.addEventListener("click", this.handleBackEvent.bind(this));
       let entries = document.getElementsByClassName("entry");
       for (let entry of entries) {
          entry.addEventListener("click", this.handleSelectEvent);
       }
-      let buttons = document.getElementsByClassName("pseudo-button");
-      for (let button of buttons) {
-         button.addEventListener("click", this.handleDetailEvent);
+      let success_button = document.getElementById("successful");
+      if (success_button != null) {
+         success_button.addEventListener("click", this.handleSuccessEvent.bind(this))
       }
+      let fail_button = document.getElementById("unsuccessful");
+      if (fail_button != null) {
+         fail_button.addEventListener("click", this.handleFailEvent.bind(this))
+      }
+   }
+
+   handleBackEvent(event) {
+      APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, this.training_id]);
    }
 
    handleSelectEvent(event) {
@@ -61,7 +72,7 @@ class ParticipationEmployees {
       }
    }
 
-   handleDetailEvent(event) {
+   handleSuccessEvent(event) {
       let selected_entry = document.getElementsByClassName("selected");
       if (selected_entry.length == 0) {
          alert("Bitte zuerst einen Eintrag auswählen!");
@@ -74,8 +85,24 @@ class ParticipationEmployees {
                break;
             }
          }
-         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]);
-         event.preventDefault();
+         this.successfulParticipation(event, id_of_selected_entry);
       }
+   }
+
+   handleFailEvent(event) {
+      console.log("handleFailEvent...")
+   }
+
+   successfulParticipation(event, id_employee) {
+      let path = "/app?training=True&participation=True&id=" + this.training_id;
+      let requester = new APPUTIL.Requester();
+      requester.GET(path)
+      .then (result => {
+         this.do_render(JSON.parse(result));
+         this.configHandleEvent();
+      })
+      .catch (error => {
+         alert("fetch-error (get): " + error);
+      });
    }
 }

@@ -1,1 +1,41 @@
-Platzhalter participation_training_finished.html
+<h1>#context[1][0]# vom #context[1][1]# bis #context[1][2]#:</h1>
+@if context[2].length > 0@
+<div class="row-oriented-table rtable-5-cols">
+    <!-- Table Head -->
+    <div class="rtable-head">Name</div>
+    <div class="rtable-head">Vorname</div>
+    <div class="rtable-head">Akademische Grade</div>
+    <div class="rtable-head">Tätigkeit</div>
+    <div class="rtable-head">Teilnahmestatus</div>
+    <!-- Table Content -->
+    @for let i in context[2]@
+        @let entry = context[2][i]@
+        @let id = "id-" + entry[0]@
+        <div class="#id# rtable-cell entry">#entry[1]#</div>
+        <div class="#id# rtable-cell entry">#entry[2]#</div>
+        <div class="#id# rtable-cell entry">#entry[3]#</div>
+        <div class="#id# rtable-cell entry">#entry[4]#</div>
+        <div class="#id# rtable-cell entry">#entry[5]#</div>
+    @endfor@
+</div>
+<!-- Table Foot -->
+<div class="row-oriented-table rtable-6-cols">
+    <div class="rtable-cell nested-row-oriented-table no-border"></div> <!-- damit die 2 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell nested-row-oriented-table no-border"></div> <!-- damit die 2 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button" id="successful" data-href="participation_training_finished">erfolgreich</p>
+    </div>
+    <div class="rtable-cell nested-row-oriented-table no-border">
+        <p class="pseudo-button" id="unsuccessful" data-href="participation_training_finished">nicht erfolgreich</p>
+    </div>
+    <div class="rtable-cell nested-row-oriented-table no-border"></div> <!-- damit die 2 Buttons nicht so weit auseinander sind -->
+    <div class="rtable-cell nested-row-oriented-table no-border"></div> <!-- damit die 2 Buttons nicht so weit auseinander sind -->
+</div>
+@else@
+<h2>Keine Teilnehmer.</h2>
+@endif@
+<div class="row-oriented-table rtable-1-cols">
+    <div class="rtable-cell no-border nested-row-oriented-table">
+        <p class="pseudo-button" id="back" data-href="participation_trainings">zurück</p>
+    </div>
+</div>

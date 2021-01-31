@@ -143,11 +143,10 @@ class Database:
          if str(training['id']) == str(id_training):
             for employee in self.employee_data:
                if str(employee['id']) == str(id_employee):
-                  employee[4][id_training] = "angemeldet"
+                  employee['Daten'][4][str(id_training)] = "angemeldet"
                   self.save_employee_data(id_employee)
                   status = True
                   break
-         if status:
             break
       return status
 
@@ -157,13 +156,14 @@ class Database:
          if str(training['id']) == str(id_training):
             for employee in self.employee_data:
                if str(employee['id']) == str(id_employee):
-                  training_status = employee[4].get(id_training, 0)
+                  training_status = employee['Daten'][4].get(id_training, 0)
+                  print("training_status: ")
+                  print(training_status)
                   if training_status == "angemeldet":
-                     employee[4][id_training] = "storniert"
+                     employee['Daten'][4][str(id_training)] = "storniert"
                      self.save_employee_data(id_employee)
                      status = True
                      break
-         if status:
             break
       return status
 
@@ -173,13 +173,12 @@ class Database:
          if str(training['id']) == str(id_training):
             for employee in self.employee_data:
                if str(employee['id']) == str(id_employee):
-                  training_status = employee[4].get(id_training, 0)
+                  training_status = employee['Daten'][4].get(id_training, 0)
                   if training_status == "angemeldet" or training_status == "nimmt teil":
-                     employee[4][id_training] = "abgebrochen"
+                     employee['Daten'][4][str(id_training)] = "abgebrochen"
                      self.save_employee_data(id_employee)
                      status = True
                      break
-         if status:
             break
       return status
 
@@ -216,6 +215,12 @@ class Database:
       if (os.path.exists(path_with_file_name)):
          os.remove(path_with_file_name)
          self.read_training_data() # update self.training_data after deletion
+         for employee in self.employee_data:
+            for training_id in employee['Daten'][4].keys():
+               if str(training_id) == str(id):
+                  del employee['Daten'][4][training_id]
+                  self.save_employee_data(employee['id'])
+                  break
          status = True
       return status
 
@@ -251,33 +256,33 @@ class Database:
       data = list() # Aufbau jeweils: [id_employee, name, vorname, akad. Grade, Tätigkeit, Teilnahmestatus]
       for training in self.training_data:
          if str(training['id']) == str(id):
+            data.append(training['id'])
+            data.append(training['Daten'])
+            data.append(list())
             for employee in self.employee_data:
                status = employee['Daten'][4].get(id, 0)
                if status == "angemeldet" or status == "nimmt teil" or status == "nicht erfolgreich beendet" or status == "erfolgreich beendet":
-                  data.append([employee['id'], employee['Daten'][0], employee['Daten'][1], employee['Daten'][2], employee['Daten'][3], status])
+                  data[2].append([employee['id'], employee['Daten'][0], employee['Daten'][1], employee['Daten'][2], employee['Daten'][3], status])
       return data
 
    def calculate_participation_employee(self, id_param):
-      data = list() # [[Trainings, zu denen sich Mitarbeiter anmelden kann], [bereits gebuchte, zukünftige Trainings]], jeweils Aufbau: [id, bezeichnung, von, bis, beschreibung]
-      data.append(list())
-      data.append(list())
       employee_data = self.read_employee(id_param)
       training_data = self.training_data
       already_registered_trainings = list()
       today = self.validator.today
-      future_trainings = list()
+      data = [id_param, employee_data]
+      data.append(list())
+      data.append(list())
       for k, v in employee_data[4].items():
          if v == "angemeldet":
-            already_registered_trainings.append(k)
+            already_registered_trainings.append(int(k))
       for training in training_data:
          start_date = self.validator.get_date(training['Daten'][1])
          if start_date > today:
-            future_trainings.append(training['id'])
-      for id in future_trainings:
-         if id not in already_registered_trainings:
-            data[0].append([id, training_data[id][0], training_data[id][1], training_data[id][2], training_data[id][3]])
-         else:
-            data[1].append([id, training_data[id][0], training_data[id][1], training_data[id][2], training_data[id][3]])
+            if int(training['id']) not in already_registered_trainings:
+               data[2].append([training['id'], training['Daten'][0], training['Daten'][1], training['Daten'][2], training['Daten'][3]])
+            else:
+               data[3].append([training['id'], training['Daten'][0], training['Daten'][1], training['Daten'][2], training['Daten'][3]])
       return data
 
    def calculate_participation_trainings(self):

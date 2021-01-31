@@ -1,1 +1,59 @@
-Platzhalter participation_trainings.html
+@if context[0].length > 0@
+    <h1>Laufende Weiterbildungen</h1>
+    <div class="row-oriented-table rtable-6-cols">
+        <!-- Table Head -->
+        <div class="rtable-head">Bezeichnung</div>
+        <div class="rtable-head">Von</div>
+        <div class="rtable-head">Bis</div>
+        <div class="rtable-head">Beschreibung</div>
+        <div class="rtable-head">minimale Teilnehmeranzahl</div>
+        <div class="rtable-head">maximale Teilnehmeranzahl</div>
+        <!-- Table Content -->
+        @for let i in context[0]@
+            @entry = context[0][i]@
+            @id = "id-" + entry[0]@
+            <div class="#id# rtable-cell entry-1">#entry[1]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[2]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[3]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[4]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[6]#</div>
+            <div class="#id# rtable-cell entry-1">#entry[5]#</div>
+        @endfor@
+    </div>
+    <div class="row-oriented-table rtable-1-cols"></div>
+        <div class="rtable-cell nested-row-oriented-table no-border">
+            <p class="pseudo-button" id="detail-ongoing" data-href="participation_training_ongoing">auswählen</p>
+        </div>
+    </div>
+@endif@
+@if context[1].length > 0@
+    <h1>Abgeschlossene Weiterbildungen</h1>
+    <div class="row-oriented-table rtable-6-cols">
+        <!-- Table Head -->
+        <div class="rtable-head">Bezeichnung</div>
+        <div class="rtable-head">Von</div>
+        <div class="rtable-head">Bis</div>
+        <div class="rtable-head">Beschreibung</div>
+        <div class="rtable-head">minimale Teilnehmeranzahl</div>
+        <div class="rtable-head">maximale Teilnehmeranzahl</div>
+        <!-- Table Content -->
+        @for let i in context[1]@
+            @entry = context[1][i]@
+            @id = "id-" + entry[0]@
+            <div class="#id# rtable-cell entry-2">#entry[1]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[2]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[3]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[4]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[6]#</div>
+            <div class="#id# rtable-cell entry-2">#entry[5]#</div>
+        @endfor@
+    </div>
+    <div class="row-oriented-table rtable-1-cols"></div>
+        <div class="rtable-cell nested-row-oriented-table no-border">
+            <p class="pseudo-button" id="detail-finished" data-href="participation_training_finished">auswählen</p>
+        </div>
+    </div>
+@endif@
+@if context[0].length == 0 && context[1].length == 0@
+    <h2>Es gibt derzeit keine laufenden und abgeschlossene Weiterbildungen.</h2>
+@endif@
