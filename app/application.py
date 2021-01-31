@@ -86,6 +86,7 @@ class Application:
       else: # es handelt sich um Qualifikations-Daten
          self.database.save_qualification(id_param, bezeichnung, index)
 
+
    def PUT(self, id_param=None, index=None, name=None, vorname=None, akadGrade=None, taetigkeit=None, bezeichnung=None, von=None, bis=None, beschreibung=None, maxTeiln=None, minTeiln=None, qualification0=None, zertifikat=None, id_training=None, id_employee=None, register=False, cancel=False, participation_success=False, participation_failed=False):
       if register != False: # ein Mitarbeiter möchte sich für eine Weiterbildung registrieren
          self.database.register_for_training(id_employee, id_training)
