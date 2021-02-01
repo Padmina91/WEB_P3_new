@@ -17,6 +17,7 @@ class FormQualification {
         requester.GET(path)
         .then (result => {
             this.do_render(JSON.parse(result));
+            this.configHandleEvent();
         })
         .catch (error => {
            alert("fetch-error (get) in der form_qualification.js: " + error);
@@ -29,7 +30,6 @@ class FormQualification {
         let element = document.getElementById(this.element);
         if (element != null) {
            element.innerHTML = markup;
-           this.configHandleEvent();
         }
     }
 

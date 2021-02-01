@@ -2,15 +2,15 @@
 
 ###
 // Delete_Req1
-DELETE {{url}}app?id_employee=4
+DELETE {{url}}app?id_employee=ce44e4b7-a464-4088-88b3-1b8883a11f8d
 // Mitarbeiter löschen
 
 ###
 // Delete_Req2
-DELETE {{url}}app?id_training=8
+DELETE {{url}}app?id_training=a87a368e-3132-41dd-b4b3-35a808f98493
 // Training löschen
 
 ###
 // Delete_Req3
-DELETE {{url}}app?id_training=6&index_qualification=1
-// Qualifikation mit Index 1 von der Weiterbildung 6 löschen
+DELETE {{url}}app?id_training=c738556c-f523-498d-95e2-dfbc5b195786&index_qualification=1
+// Qualifikation mit Index 1 von einer Weiterbildung löschen

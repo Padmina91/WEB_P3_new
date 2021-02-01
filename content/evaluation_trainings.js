@@ -7,7 +7,6 @@ class EvaluationTrainings {
    }
 
    render () {
-      // Daten anfordern
       let path = "/app?evaluation=True&training=True"
       let requester = new APPUTIL.Requester();
       requester.GET(path)

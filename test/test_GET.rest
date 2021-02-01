@@ -22,76 +22,70 @@ GET {{url}}app?training=True
 
 ###
 // Get_Req5
-GET {{url}}app?id=14&employee=True
+GET {{url}}app?id=7921c67b-dd4c-4e42-94bc-ad722625565c&employee=True
 // Mitarbeiterdaten von Mikasa Ackermann anfordern
 
 ###
 // Get_Req6
-GET {{url}}app?id=3&employee=True
+GET {{url}}app?id=84a7821c-6ba7-4051-b3e6-836e98a46f51&employee=True
 // Mitarbeiterdaten von Susanne Musterfrau anfordern
 
 ###
 // Get_Req7
-GET {{url}}app?id=4&employee=True
-// Mitarbeiterdaten von Max Mustermann anfordern
-
-###
-// Get_Req8
-GET {{url}}app?id=17&employee=True
-// Mitarbeiterdaten von Eren Jäger anfordern
-
-###
-// Get_Req9
-GET {{url}}app?id=17&employee=True&form=True
+GET {{url}}app?id=3616a6c3-881f-4a9a-8ca3-b2895e50dd50&employee=True&form=True
 // Formulardaten von Eren Jäger anfordern
 
 ###
-// Get_Req10
-GET {{url}}app?id=24&training=True&form=True
-// Formulardaten von der Weiterbildung 24 anfordern
+// Get_Req8
+GET {{url}}app?id=736877b8-bcc1-4e84-983b-7e1aa02f867d&training=True&form=True
+// Formulardaten von einer Weiterbildung anfordern
 
 ###
-// Get_Req11
+// Get_Req9
 GET {{url}}app?training=True&form=True
 // leere Weiterbildungs-Formulardaten anfordern
 
 ###
-// Get_Req12
+// Get_Req10
 GET {{url}}app?employee=True&form=True
 // leere Mitarbeiter-Formulardaten anfordern
 
 ###
-// Get_Req13
-GET {{url}}app?form=True&id=6&index_qualification=2
-// Qualifikations-Formulardaten von Weiterbildung 6 mit Index 2 anfordern
+// Get_Req11
+GET {{url}}app?form=True&id=c738556c-f523-498d-95e2-dfbc5b195786&index_qualification=2
+// Qualifikations-Formulardaten von einer Weiterbildung mit Index 2 anfordern
 
 ###
-// Get_Req14
-GET {{url}}app?form=True&id=6
+// Get_Req12
+GET {{url}}app?form=True&id=c738556c-f523-498d-95e2-dfbc5b195786
 // leere Qualifikations-Formulardaten von Weiterbildung 6 anfordern
 
 ###
-// Get_Req15
+// Get_Req13
 GET {{url}}app?evaluation=True&training=True
+// Auswertungs-Daten von allen Weiterbildungen anfordern
+
+###
+// Get_Req14
+GET {{url}}app?evaluation=True&employee=True
+// Auswertungs-Daten von allen Mitarbeitern anfordern
+
+###
+// Get_Req15
+GET {{url}}app?evaluation=True&certificate=True
+// Auswertungs-Daten von allen Zertifikaten anfordern
 
 ###
 // Get_Req16
-GET {{url}}app?evaluation=True&employee=True
+GET {{url}}app?participation=True&employee=True&id=ce44e4b7-a464-4088-88b3-1b8883a11f8d
+// Teilnahme-Daten von einem Mitarbeiter anfordern
 
 ###
 // Get_Req17
-GET {{url}}app?evaluation=True&certificate=True
+GET {{url}}app?training=True&participation=True
+// Teilnahme-Daten von allen abgeschlossenen Weiterbildungen anfordern
 
 ###
 // Get_Req18
-GET {{url}}app?participation=True&employee=True&id=14
-
-###
-// Get_Req19
-GET {{url}}app?training=True&participation=True
-// Teilnahme-Daten von allen Weiterbildungen anfordern
-
-###
-// Get_Req20
-GET {{url}}app?training=True&participation=True&id=8
+GET {{url}}app?training=True&participation=True&id=a87a368e-3132-41dd-b4b3-35a808f98493
 // Teilnahme-Daten von Weiterbildung 8 anfordern

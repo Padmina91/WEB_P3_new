@@ -3,7 +3,7 @@
 import cherrypy
 import json
 from .database import Database
-from .view import View
+#from .view import View
 
 class Application:
 
@@ -11,7 +11,7 @@ class Application:
 
    def __init__(self):
       self.database = Database()
-      self.view = View()
+      #self.view = View()
 
 
    def GET(self, id=None, training=False, employee=False, certificate=False, form=False, index_qualification=None, evaluation=False, participation=False):
@@ -87,16 +87,17 @@ class Application:
          self.database.save_qualification(id_param, bezeichnung, index)
 
 
-   def PUT(self, id_param=None, index=None, name=None, vorname=None, akadGrade=None, taetigkeit=None, bezeichnung=None, von=None, bis=None, beschreibung=None, maxTeiln=None, minTeiln=None, qualification0=None, zertifikat=None, id_training=None, id_employee=None, register=False, cancel=False, participation_success=False, participation_failed=False):
+   def PUT(self, id_param=None, index=None, name=None, vorname=None, akadGrade=None, taetigkeit=None, bezeichnung=None, von=None, bis=None, beschreibung=None, maxTeiln=None, minTeiln=None, qualification0=None, zertifikat=None, id_training=None, id_employee=None, register=False, cancel=False, participation_success=False, participation_failed=False, drop_out=False):
       if register != False: # ein Mitarbeiter möchte sich für eine Weiterbildung registrieren
          self.database.register_for_training(id_employee, id_training)
       elif cancel != False: # ein Mitarbeiter möchte seine Teilnahme zu einem Training stornieren
-         print("Mitarbeiter möchte seine Teilnahme stornieren.")
          self.database.cancel_registration(id_employee, id_training)
       elif participation_success != False: # ein Mitarbeiter hat die Weiterbildung erfolgreich abgeschlossen
-         pass # TODO: morgen hier weiter
+         self.database.update_participation_status(id_training, id_employee, "erfolgreich beendet")
       elif participation_failed != False: # ein Mitarbeiter hat die Weiterbildung nicht erfolgreich abgeschlossen
-         pass
+         self.database.update_participation_status(id_training, id_employee, "nicht erfolgreich beendet")
+      elif drop_out != False: # ein Mitarbeiter hat die Teilnahme an einer Weiterbildung abgebrochen
+         self.database.update_participation_status(id_training, id_employee, "abgebrochen")
       elif vorname != None and index == None: # es handelt sich um Mitarbeiter-Daten
          self.database.save_employee(id_param, name, vorname, akadGrade, taetigkeit)
       elif von != None: # es handelt sich um Weiterbildungs-Daten

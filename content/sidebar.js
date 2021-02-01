@@ -24,7 +24,6 @@ class Sidebar {
    }
 
    handleEvent (event) {
-      APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
-      event.preventDefault();
+      APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
    }
 }

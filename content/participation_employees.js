@@ -8,7 +8,6 @@ class ParticipationEmployees {
    }
 
    render () {
-      // Daten anfordern
       let path = "/app?employee=True";
       let requester = new APPUTIL.Requester();
       requester.GET(path)
@@ -75,7 +74,6 @@ class ParticipationEmployees {
             }
          }
          APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]);
-         event.preventDefault();
       }
    }
 }

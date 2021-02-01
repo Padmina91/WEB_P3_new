@@ -7,7 +7,6 @@ class Home {
     }
 
     render() {
-        // Daten anfordern
         let path = "/app";
         let requester = new APPUTIL.Requester();
         requester.GET(path)

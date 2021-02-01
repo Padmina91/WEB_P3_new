@@ -157,8 +157,6 @@ class Database:
             for employee in self.employee_data:
                if str(employee['id']) == str(id_employee):
                   training_status = employee['Daten'][4].get(id_training, 0)
-                  print("training_status: ")
-                  print(training_status)
                   if training_status == "angemeldet":
                      employee['Daten'][4][str(id_training)] = "storniert"
                      self.save_employee_data(id_employee)
@@ -184,18 +182,14 @@ class Database:
 
    def update_participation_status(self, id_training, id_employee, new_participation_status):
       status = False
-      for training in self.training_data:
-         if str(training['id']) == str(id_training):
-            for employee in self.employee_data:
-               if str(employee['id']) == str(id_employee):
-                  training_status = employee[4].get(id_training, 0)
-                  if training_status != "storniert" and training_status != "abgebrochen" and training_status != new_participation_status and training_status != 0:
-                     employee[4][id_training] = new_participation_status
-                     self.save_employee_data(id_employee)
-                     status = True
-                     break
-         if status:
-            break
+      for employee in self.employee_data:
+         if str(employee['id']) == str(id_employee):
+            training_status = employee['Daten'][4].get(id_training, 0)
+            if training_status != "storniert" and training_status != "abgebrochen" and training_status != new_participation_status and training_status != 0:
+               employee['Daten'][4][id_training] = new_participation_status
+               self.save_employee_data(id_employee)
+               status = True
+               break
       return status
 
    def delete_employee_entry(self, id):
@@ -238,8 +232,8 @@ class Database:
 
    def save_training(self, id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat):
       id = -1
-      if id_param != "":
-         id = int(id_param)
+      if id_param != "" and id_param != None:
+         id = id_param
       data = [bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, [qualification0], [zertifikat]]
       if data[7][0] == "":
          data[7] = list()
@@ -275,11 +269,11 @@ class Database:
       data.append(list())
       for k, v in employee_data[4].items():
          if v == "angemeldet":
-            already_registered_trainings.append(int(k))
+            already_registered_trainings.append(k)
       for training in training_data:
          start_date = self.validator.get_date(training['Daten'][1])
          if start_date > today:
-            if int(training['id']) not in already_registered_trainings:
+            if training['id'] not in already_registered_trainings:
                data[2].append([training['id'], training['Daten'][0], training['Daten'][1], training['Daten'][2], training['Daten'][3]])
             else:
                data[3].append([training['id'], training['Daten'][0], training['Daten'][1], training['Daten'][2], training['Daten'][3]])

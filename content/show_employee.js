@@ -7,12 +7,12 @@ class ShowEmployee {
     }
 
     render(id) {
-        // Daten anfordern
         let path = "/app?employee=True&id=" + id;
         let requester = new APPUTIL.Requester();
         requester.GET(path)
         .then (result => {
            this.do_render(JSON.parse(result));
+           this.configHandleEvent();
         })
         .catch (error => {
            alert("fetch-error (get): ");
@@ -24,7 +24,6 @@ class ShowEmployee {
         let element = document.getElementById(this.element);
         if (element != null) {
            element.innerHTML = markup;
-           this.configHandleEvent();
         }
      }
 

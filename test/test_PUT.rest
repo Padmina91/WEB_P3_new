@@ -2,10 +2,15 @@
 
 ###
 // Put_Req1
-PUT {{url}}app?register=True&id_employee=7&id_training=24
-// Hansi möchte Japanisch lernen
+PUT {{url}}app?register=True&id_employee=3616a6c3-881f-4a9a-8ca3-b2895e50dd50&id_training=736877b8-bcc1-4e84-983b-7e1aa02f867d
+// Eren Jäger möchte sich für Japanisch für Fortgeschrittene anmelden
 
 ###
-// Put_Req1
-PUT {{url}}app?cancel=True&id_employee=7&id_training=24
-// Hansi ist leider zu doof zum Japanisch lernen
+// Put_Req2
+PUT {{url}}app?cancel=True&id_employee=3616a6c3-881f-4a9a-8ca3-b2895e50dd50&id_training=736877b8-bcc1-4e84-983b-7e1aa02f867d
+// Eren Jäger bricht seine Teilnahme bei Japanisch für Fortgeschrittene wieder ab
+
+###
+// Put_Req3
+PUT {{url}}app?participation_success=True&id_training=a87a368e-3132-41dd-b4b3-35a808f98493&id_employee=84a7821c-6ba7-4051-b3e6-836e98a46f51
+// Susanne Musterfrau hat die Abgeschlossene Weiterbildung 1 erfolgreich beendet

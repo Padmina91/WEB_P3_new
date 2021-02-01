@@ -8,7 +8,6 @@ class FormTraining {
 
     render(id = null) {
         this.id = id;
-        // Daten anfordern
         let path = "/app?training=True&form=True"
         if (id != null) {
             path = path + "&id=" + id;
@@ -17,6 +16,7 @@ class FormTraining {
         requester.GET(path)
         .then (result => {
             this.do_render(JSON.parse(result));
+            this.configHandleEvent();
         })
         .catch (error => {
            alert("fetch-error (get) in der form_training.js in render(): " + error);
@@ -28,7 +28,6 @@ class FormTraining {
         let element = document.getElementById(this.element);
         if (element != null) {
            element.innerHTML = markup;
-           this.configHandleEvent();
         }
      }
 

@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Server: CherryPy/18.6.0
+Date: Mon, 01 Feb 2021 21:29:18 GMT
+Allow: DELETE, GET, HEAD, POST, PUT
+Content-Length: 739
+Connection: close
+
+["a87a368e-3132-41dd-b4b3-35a808f98493", ["Abgeschlossene Weiterbildung", "2021-01-18", "2021-01-26", "Eine abgeschlossene Weiterbildung", "60", "3", ["Abgeschlossene Qualifikation"], ["Abgeschlossenes Zertifikat"]], [["84a7821c-6ba7-4051-b3e6-836e98a46f51", "Musterfrau", "Susanne", "Doktor", "Programmiererin", "nicht erfolgreich beendet"], ["ce44e4b7-a464-4088-88b3-1b8883a11f8d", "Mustermann", "Max", "Professor", "Prof an der HSNR", "erfolgreich beendet"], ["d87ed648-98a2-486a-abc3-62bf63da0f87", "Schlaumeier", "Alfons", "Sehr schlauer Mensch", "Sehr schlaue T\u00e4tigkeit", "nicht erfolgreich beendet"], ["7921c67b-dd4c-4e42-94bc-ad722625565c", "Ackermann", "Mikasa", "Prof. Dr. Dr.", "Titanenforscherin", "erfolgreich beendet"]]]

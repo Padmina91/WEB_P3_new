@@ -7,7 +7,6 @@ class ShowTraining {
     }
 
     render(id) {
-        // Daten anfordern
         let path = "/app?training=True&id=" + id;
         let requester = new APPUTIL.Requester();
         requester.GET(path)
@@ -37,6 +36,5 @@ class ShowTraining {
 
     handleReturnEvent(event) {
         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
-        event.preventDefault();
     }
 }

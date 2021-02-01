@@ -9,7 +9,6 @@ class ParticipationEmployee {
 
    render (id) {
       this.employee_id = id;
-      // Daten anfordern
       let path = "/app?participation=True&employee=True&id=" + this.employee_id;
       let requester = new APPUTIL.Requester();
       requester.GET(path)

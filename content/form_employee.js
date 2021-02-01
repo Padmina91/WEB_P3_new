@@ -7,7 +7,6 @@ class FormEmployee {
     }
 
     render(id = null) {
-        // Daten anfordern
         let path = "/app?employee=True&form=True"
         if (id != null) {
             path = path + "&id=" + id;
@@ -16,6 +15,7 @@ class FormEmployee {
         requester.GET(path)
         .then (result => {
            this.do_render(JSON.parse(result));
+           this.configHandleEvent();
         })
         .catch (error => {
            alert("fetch-error (get): " + error);
@@ -27,7 +27,6 @@ class FormEmployee {
         let element = document.getElementById(this.element);
         if (element != null) {
            element.innerHTML = markup;
-           this.configHandleEvent();
         }
      }
 

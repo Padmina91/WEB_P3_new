@@ -1370,3 +1370,230 @@ Request Headers:
 [31/Jan/2021:22:18:25] ENGINE Bus STARTING
 [31/Jan/2021:22:18:25] ENGINE Serving on http://127.0.0.1:8080
 [31/Jan/2021:22:18:25] ENGINE Bus STARTED
+[01/Feb/2021:10:04:49] ENGINE Bus STARTING
+[01/Feb/2021:10:04:50] ENGINE Serving on http://127.0.0.1:8080
+[01/Feb/2021:10:04:50] ENGINE Bus STARTED
+[01/Feb/2021:20:27:24] ENGINE Bus STARTING
+[01/Feb/2021:20:27:24] ENGINE Serving on http://127.0.0.1:8080
+[01/Feb/2021:20:27:24] ENGINE Bus STARTED
+[01/Feb/2021:20:55:58] ENGINE Bus STARTING
+[01/Feb/2021:20:55:58] ENGINE Serving on http://127.0.0.1:8080
+[01/Feb/2021:20:55:58] ENGINE Bus STARTED
+[01/Feb/2021:20:58:56] HTTP 
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 638, in respond
+    self._do_respond(path_info)
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 697, in _do_respond
+    response.body = self.handler()
+  File "C:\Python39\lib\site-packages\cherrypy\lib\encoding.py", line 219, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "C:\Python39\lib\site-packages\cherrypy\_cpdispatch.py", line 54, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\application.py", line 105, in PUT
+    self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\database.py", line 238, in save_training
+    id = int(id_param)
+ValueError: invalid literal for int() with base 10: 'c738556c-f523-498d-95e2-dfbc5b195786'
+[01/Feb/2021:20:58:56] HTTP 
+Request Headers:
+  Remote-Addr: 127.0.0.1
+  HOST: 127.0.0.1:8080
+  CONNECTION: keep-alive
+  CACHE-CONTROL: max-age=0
+  SEC-CH-UA: "Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"
+  DNT: 1
+  SEC-CH-UA-MOBILE: ?0
+  USER-AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36
+  ACCEPT: */*
+  ORIGIN: http://127.0.0.1:8080
+  SEC-FETCH-SITE: same-origin
+  SEC-FETCH-MODE: cors
+  SEC-FETCH-DEST: empty
+  REFERER: http://127.0.0.1:8080/
+  ACCEPT-ENCODING: gzip, deflate, br
+  ACCEPT-LANGUAGE: de,en-US;q=0.9,en;q=0.8
+  Content-Type: multipart/form-data; boundary=----WebKitFormBoundarysuUnq4p1vDgVwITJ
+  Content-Length: 1102
+[01/Feb/2021:21:07:22] HTTP 
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 638, in respond
+    self._do_respond(path_info)
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 697, in _do_respond
+    response.body = self.handler()
+  File "C:\Python39\lib\site-packages\cherrypy\lib\encoding.py", line 219, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "C:\Python39\lib\site-packages\cherrypy\_cpdispatch.py", line 54, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\application.py", line 105, in PUT
+    self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\database.py", line 238, in save_training
+    id = int(id_param)
+ValueError: invalid literal for int() with base 10: '736877b8-bcc1-4e84-983b-7e1aa02f867d'
+[01/Feb/2021:21:07:22] HTTP 
+Request Headers:
+  Remote-Addr: 127.0.0.1
+  HOST: 127.0.0.1:8080
+  CONNECTION: keep-alive
+  CACHE-CONTROL: max-age=0
+  SEC-CH-UA: "Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"
+  DNT: 1
+  SEC-CH-UA-MOBILE: ?0
+  USER-AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36
+  ACCEPT: */*
+  ORIGIN: http://127.0.0.1:8080
+  SEC-FETCH-SITE: same-origin
+  SEC-FETCH-MODE: cors
+  SEC-FETCH-DEST: empty
+  REFERER: http://127.0.0.1:8080/
+  ACCEPT-ENCODING: gzip, deflate, br
+  ACCEPT-LANGUAGE: de,en-US;q=0.9,en;q=0.8
+  Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywXCwqABIF1wRa6rI
+  Content-Length: 1077
+[01/Feb/2021:21:07:46] HTTP 
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 638, in respond
+    self._do_respond(path_info)
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 697, in _do_respond
+    response.body = self.handler()
+  File "C:\Python39\lib\site-packages\cherrypy\lib\encoding.py", line 219, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "C:\Python39\lib\site-packages\cherrypy\_cpdispatch.py", line 54, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\application.py", line 105, in PUT
+    self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\database.py", line 238, in save_training
+    id = int(id_param)
+ValueError: invalid literal for int() with base 10: '736877b8-bcc1-4e84-983b-7e1aa02f867d'
+[01/Feb/2021:21:07:46] HTTP 
+Request Headers:
+  Remote-Addr: 127.0.0.1
+  HOST: 127.0.0.1:8080
+  CONNECTION: keep-alive
+  CACHE-CONTROL: max-age=0
+  SEC-CH-UA: "Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"
+  DNT: 1
+  SEC-CH-UA-MOBILE: ?0
+  USER-AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36
+  ACCEPT: */*
+  ORIGIN: http://127.0.0.1:8080
+  SEC-FETCH-SITE: same-origin
+  SEC-FETCH-MODE: cors
+  SEC-FETCH-DEST: empty
+  REFERER: http://127.0.0.1:8080/
+  ACCEPT-ENCODING: gzip, deflate, br
+  ACCEPT-LANGUAGE: de,en-US;q=0.9,en;q=0.8
+  Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryi0tUYSMJM9AOehEc
+  Content-Length: 1075
+[01/Feb/2021:21:12:08] ENGINE Bus STARTING
+[01/Feb/2021:21:12:08] ENGINE Serving on http://127.0.0.1:8080
+[01/Feb/2021:21:12:08] ENGINE Bus STARTED
+[01/Feb/2021:21:12:37] HTTP 
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 638, in respond
+    self._do_respond(path_info)
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 697, in _do_respond
+    response.body = self.handler()
+  File "C:\Python39\lib\site-packages\cherrypy\lib\encoding.py", line 219, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "C:\Python39\lib\site-packages\cherrypy\_cpdispatch.py", line 54, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\application.py", line 105, in PUT
+    self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\database.py", line 238, in save_training
+    id = int(id_param)
+ValueError: invalid literal for int() with base 10: '736877b8-bcc1-4e84-983b-7e1aa02f867d'
+[01/Feb/2021:21:12:37] HTTP 
+Request Headers:
+  Remote-Addr: 127.0.0.1
+  HOST: 127.0.0.1:8080
+  CONNECTION: keep-alive
+  CACHE-CONTROL: max-age=0
+  SEC-CH-UA: "Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"
+  DNT: 1
+  SEC-CH-UA-MOBILE: ?0
+  USER-AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36
+  ACCEPT: */*
+  ORIGIN: http://127.0.0.1:8080
+  SEC-FETCH-SITE: same-origin
+  SEC-FETCH-MODE: cors
+  SEC-FETCH-DEST: empty
+  REFERER: http://127.0.0.1:8080/
+  ACCEPT-ENCODING: gzip, deflate, br
+  ACCEPT-LANGUAGE: de,en-US;q=0.9,en;q=0.8
+  Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryUbIsuRjqrbQBmPLL
+  Content-Length: 1078
+[01/Feb/2021:21:14:27] ENGINE Bus STARTING
+[01/Feb/2021:21:14:27] ENGINE Serving on http://127.0.0.1:8080
+[01/Feb/2021:21:14:27] ENGINE Bus STARTED
+[01/Feb/2021:22:33:58] ENGINE Bus STARTING
+[01/Feb/2021:22:33:59] ENGINE Serving on http://127.0.0.1:8080
+[01/Feb/2021:22:33:59] ENGINE Bus STARTED
+[01/Feb/2021:22:43:52] HTTP 
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 638, in respond
+    self._do_respond(path_info)
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 697, in _do_respond
+    response.body = self.handler()
+  File "C:\Python39\lib\site-packages\cherrypy\lib\encoding.py", line 219, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "C:\Python39\lib\site-packages\cherrypy\_cpdispatch.py", line 54, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\application.py", line 85, in POST
+    self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\database.py", line 243, in save_training
+    data[6] = training_data[6] # Qualifikationen (1 bis n)
+IndexError: list index out of range
+[01/Feb/2021:22:43:52] HTTP 
+Request Headers:
+  Remote-Addr: 127.0.0.1
+  USER-AGENT: vscode-restclient
+  ACCEPT-ENCODING: gzip, deflate
+  HOST: 127.0.0.1:8080
+  CONNECTION: close
+  Content-Length: 0
+[01/Feb/2021:22:44:51] HTTP 
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 638, in respond
+    self._do_respond(path_info)
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 697, in _do_respond
+    response.body = self.handler()
+  File "C:\Python39\lib\site-packages\cherrypy\lib\encoding.py", line 219, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "C:\Python39\lib\site-packages\cherrypy\_cpdispatch.py", line 54, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\application.py", line 85, in POST
+    self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\database.py", line 243, in save_training
+    data[6] = training_data[6] # Qualifikationen (1 bis n)
+IndexError: list index out of range
+[01/Feb/2021:22:44:51] HTTP 
+Request Headers:
+  Remote-Addr: 127.0.0.1
+  USER-AGENT: vscode-restclient
+  ACCEPT-ENCODING: gzip, deflate
+  HOST: 127.0.0.1:8080
+  CONNECTION: close
+  Content-Length: 0
+[01/Feb/2021:22:44:53] HTTP 
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 638, in respond
+    self._do_respond(path_info)
+  File "C:\Python39\lib\site-packages\cherrypy\_cprequest.py", line 697, in _do_respond
+    response.body = self.handler()
+  File "C:\Python39\lib\site-packages\cherrypy\lib\encoding.py", line 219, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "C:\Python39\lib\site-packages\cherrypy\_cpdispatch.py", line 54, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\application.py", line 85, in POST
+    self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
+  File "c:\Users\Schne\AppData\Local\Programs\Python\Python37\python-workspace\web\p3_neu\mq\app\database.py", line 243, in save_training
+    data[6] = training_data[6] # Qualifikationen (1 bis n)
+IndexError: list index out of range
+[01/Feb/2021:22:44:53] HTTP 
+Request Headers:
+  Remote-Addr: 127.0.0.1
+  USER-AGENT: vscode-restclient
+  ACCEPT-ENCODING: gzip, deflate
+  HOST: 127.0.0.1:8080
+  CONNECTION: close
+  Content-Length: 0

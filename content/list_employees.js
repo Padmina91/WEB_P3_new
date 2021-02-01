@@ -8,7 +8,6 @@ class ListEmployeesView {
    }
 
    render () {
-      // Daten anfordern
       let path = "/app?employee=True";
       let requester = new APPUTIL.Requester();
       requester.GET(path)
@@ -67,7 +66,7 @@ class ListEmployeesView {
 
    handleClickEvent (event) {
       if(event.target.dataset.href == "add_employee") {
-         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
+         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
          event.preventDefault();
       } else {
          let selected_entry = document.getElementsByClassName("selected");
@@ -82,8 +81,7 @@ class ListEmployeesView {
                   break;
                }
             }
-            APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]); // zweites Argument ist optional, zusätzliche Info, z.B. ID
-            event.preventDefault();
+            APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]);
          }
       }
    }
@@ -107,8 +105,7 @@ class ListEmployeesView {
             let requester = new APPUTIL.Requester();
             requester.DELETE(path)
             .then (result => {
-               this.do_render(JSON.parse(result));
-               this.configHandleEvent();
+               APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
             })
             .catch (error => {
                alert("fetch-error (get): " + error);

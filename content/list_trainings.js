@@ -8,7 +8,6 @@ class ListTrainingsView {
    }
 
    render () {
-      // Daten anfordern
       let path = "/app?training=True";
       let requester = new APPUTIL.Requester();
       requester.GET(path)
@@ -83,7 +82,6 @@ class ListTrainingsView {
                }
             }
             APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, id_of_selected_entry]);
-            event.preventDefault();
          }
       }
    }
@@ -107,8 +105,7 @@ class ListTrainingsView {
             let requester = new APPUTIL.Requester();
             requester.DELETE(path)
             .then (result => {
-               this.do_render(JSON.parse(result));
-               this.configHandleEvent();
+               APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
             })
             .catch (error => {
                alert("fetch-error (get): " + error);

@@ -90,16 +90,40 @@ class ParticipationTrainingFinished {
    }
 
    handleFailEvent(event) {
-      console.log("handleFailEvent...")
+      let selected_entry = document.getElementsByClassName("selected");
+      if (selected_entry.length == 0) {
+         alert("Bitte zuerst einen Eintrag auswählen!");
+      } else {
+         let all_classes_of_selected_entry = selected_entry[0].classList;
+         let id_of_selected_entry = "";
+         for (let singleClass of all_classes_of_selected_entry) {
+            if (singleClass.startsWith("id")) {
+               id_of_selected_entry = singleClass.substr(3);
+               break;
+            }
+         }
+         this.unsuccessfulParticipation(event, id_of_selected_entry);
+      }
    }
 
    successfulParticipation(event, id_employee) {
-      let path = "/app?training=True&participation=True&id=" + this.training_id;
+      let path = "/app?participation_success=True&id_training=" + this.training_id + "&id_employee=" + id_employee;
       let requester = new APPUTIL.Requester();
-      requester.GET(path)
+      requester.PUT(path)
       .then (result => {
-         this.do_render(JSON.parse(result));
-         this.configHandleEvent();
+         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, this.training_id]);
+      })
+      .catch (error => {
+         alert("fetch-error (get): " + error);
+      });
+   }
+
+   unsuccessfulParticipation(event, id_employee) {
+      let path = "/app?participation_failed=True&id_training=" + this.training_id + "&id_employee=" + id_employee;
+      let requester = new APPUTIL.Requester();
+      requester.PUT(path)
+      .then (result => {
+         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, this.training_id]);
       })
       .catch (error => {
          alert("fetch-error (get): " + error);

@@ -8,7 +8,6 @@ class ParticipationTrainings {
    }
 
    render () {
-      // Daten anfordern
       let path = "/app?training=True&participation=True";
       let requester = new APPUTIL.Requester();
       requester.GET(path)
@@ -30,7 +29,6 @@ class ParticipationTrainings {
    }
 
    configHandleEvent () {
-      console.log("configHandleEvent läuft...");
       let entries1 = document.getElementsByClassName("entry-1");
       for (let entry of entries1) {
          entry.addEventListener("click", this.handleSelectEvent1);

@@ -1,2 +1,16 @@
 @url = http://127.0.0.1:8080/
 
+###
+// Post_Req1
+POST {{url}}app?name=Müller&vorname=Dieter&taetigkeit=Bauer&akadGrade=keine
+// neuen Mitarbeiter anlegen
+
+###
+// Post_Req2
+POST {{url}}app?bezeichnung=DummyWeiterbildung&von=2020-02-10&bis=2020-02-15&beschreibung=IrgendeineBeschreibung&maxTeiln=20&minTeiln=2&qualification0=quali0&zertifikat=irgendeinZertifikat
+// neue Weiterbildung anlegen
+
+###
+// Post_Req3
+POST {{url}}app?id_param=a87a368e-3132-41dd-b4b3-35a808f98493&index=1&bezeichnung=Irgendeine Test-Qualifikation
+// neue Qualifikation in vorhandener Weiterbildung speichern

@@ -7,12 +7,10 @@ class EvaluationCertificates {
    }
 
    render () {
-      // Daten anfordern
       let path = "/app?evaluation=True&certificate=True"
       let requester = new APPUTIL.Requester();
       requester.GET(path)
       .then (result => {
-         console.log(result);
          this.do_render(JSON.parse(result));
       })
       .catch (error => {
