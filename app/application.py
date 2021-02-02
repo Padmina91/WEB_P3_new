@@ -1,9 +1,7 @@
 # coding: utf-8
 
-import cherrypy
 import json
 from .database import Database
-#from .view import View
 
 class Application:
 
@@ -11,12 +9,11 @@ class Application:
 
    def __init__(self):
       self.database = Database()
-      #self.view = View()
 
 
-   def GET(self, id=None, training=False, employee=False, certificate=False, form=False, index_qualification=None, evaluation=False, participation=False):
+   def GET(self, id=None, index_qualification=None, training=False, employee=False, certificate=False, form=False, evaluation=False, participation=False):
       return_value = ''
-      if form == 'True' or form == True: # Formular-Daten
+      if form == 'True' or form == True:
          if training == 'True':
             if id == 'None' or id == None:
                return_value = self.database.get_training_default()
@@ -32,20 +29,20 @@ class Application:
                return_value = self.database.get_qualification_default(id)
             else:
                return_value = self.database.get_qualification_data(id, index_qualification)
-      elif participation == 'True' or participation == True: # Teilnahme-Daten
+      elif participation == 'True' or participation == True:
          if employee == 'True' or employee == True:
             return_value = self.database.calculate_participation_employee(id)
          elif training == 'True' or training == True:
-            if id == None: # Teilnahme-Daten von allen Trainings
+            if id == None:
                return_value = self.database.calculate_participation_trainings()
-            else: # Teilnahme-Daten von einem Training
+            else:
                return_value = self.database.calculate_participation_training(id)
-      elif evaluation == 'True' or evaluation == True: # Auswertungs-Daten
+      elif evaluation == 'True' or evaluation == True:
          if training == 'True':
             return_value = self.database.calculate_evaluation_trainings()
          elif employee == 'True':
             return_value = self.database.calculate_evaluation_employees()
-         elif certificate == 'True': # Zertifikate
+         elif certificate == 'True':
             return_value = self.database.calculate_evaluation_certificates()
       else: # Listen-Daten
          if training == 'True':
@@ -58,7 +55,7 @@ class Application:
                return_value = self.database.employee_data
             else:
                return_value = self.database.calculate_employee_with_qual_and_certs(id)
-         else:
+         else: # Startseite
             return_value = self.database.calculate_home_data()
       return json.dumps(return_value)
 
@@ -74,11 +71,11 @@ class Application:
 
 
    def POST(self, id_param=None, index=None, name=None, vorname=None, akadGrade=None, taetigkeit=None, bezeichnung=None, von=None, bis=None, beschreibung=None, maxTeiln=None, minTeiln=None, qualification0=None, zertifikat=None):
-      if vorname != None and index == None: # es handelt sich um Mitarbeiter-Daten
+      if vorname != None and index == None: # Mitarbeiter-Daten
          self.database.save_employee(id_param, name, vorname, akadGrade, taetigkeit)
-      elif von != None: # es handelt sich um Weiterbildungs-Daten
+      elif von != None: # Weiterbildungs-Daten
          self.database.save_training(id_param, bezeichnung, von, bis, beschreibung, maxTeiln, minTeiln, qualification0, zertifikat)
-      else: # es handelt sich um Qualifikations-Daten
+      else: # Qualifikations-Daten
          self.database.save_qualification(id_param, bezeichnung, index)
 
 

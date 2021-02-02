@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Mitarbeiterqualifikation-Doku</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Mitarbeiterqualifikation-Doku</h1>
+</header>
+<p>Dieses Projekt wurde von Marina Inokuchi (Matr-Nr. 1287686) bearbeitet. Letztes Bearbeitungsdatum: 02.02.2021.</p>
+<h1 id="dateistruktur">1. Dateistruktur</h1>
+<p>Die Webanwendung besteht aus folgenden Dateien (Ordner werden kursiv dargestellt):</p>
+<ul>
+<li>server.py</li>
+<li>access.log</li>
+<li>server.log</li>
+<li>server.conf</li>
+<li><em>app</em>
+<ul>
+<li>application.py</li>
+<li>database.py</li>
+<li>dataid.py</li>
+<li>template.py</li>
+<li>dateutils.py</li>
+</ul></li>
+<li><em>content</em>
+<ul>
+<li>index.html</li>
+<li>mq.css</li>
+<li>evs.js</li>
+<li>req.js</li>
+<li>tco.js</li>
+<li>tmg.js</li>
+<li>evaluation_certificates.js</li>
+<li>evaluation_employees.js</li>
+<li>evaluation_trainings.js</li>
+<li>form_employee.js</li>
+<li>form_qualification.js</li>
+<li>form_training.js</li>
+<li>home.js</li>
+<li>list_employees.js</li>
+<li>list_trainings.js</li>
+<li>main.js</li>
+<li>participation_emplyoee.js</li>
+<li>participation_employees.js</li>
+<li>participation_training_finished.js</li>
+<li>participation_training_ongoing.js</li>
+<li>participation_trainings.js</li>
+<li>show_employee.js</li>
+<li>show_training.js</li>
+<li>sidebar.js</li>
+</ul></li>
+<li><em>data</em>
+<ul>
+<li><em>employees</em>
+<ul>
+<li>diverse Mitarbeiter-Dateien (.json)</li>
+</ul></li>
+<li><em>trainings</em>
+<ul>
+<li>diverse Weiterbildungs-Dateien (.json)</li>
+</ul></li>
+</ul></li>
+<li><em>templates</em>
+<ul>
+<li>evaluation_certificates.html</li>
+<li>evaluation_employees.html</li>
+<li>evaluation_trainings.html</li>
+<li>form_employee.html</li>
+<li>form_qualification.html</li>
+<li>form_training.html</li>
+<li>header.html</li>
+<li>home.html</li>
+<li>list_employees.html</li>
+<li>list_trainings.html</li>
+<li>participation_employee.html</li>
+<li>participation_employees.html</li>
+<li>participation_training_finished.html</li>
+<li>participation_training_ongoing.html</li>
+<li>participation_trainings.html</li>
+<li>show_employee.html</li>
+<li>show_training.html</li>
+<li>sidebar.html</li>
+</ul></li>
+</ul>
+<h1 id="beschreibung-der-lösung">2. Beschreibung der Lösung</h1>
+<h2 id="aufgabe-der-anwendung">2.1. Aufgabe der Anwendung</h2>
+<p>Die Aufgabe der Anwendung ist es, die Teilnahme von mehreren Mitarbeitern an verschiedenen Weiterbildungen zu organisieren. Zusätzlich sollen auch Zertifikate und Qualifikationen, die aus erfolgreichen Teilnahmen an den Weiterbildungen resultieren, den Mitarbeitern zugeordnet werden können.</p>
+<h2 id="übersicht-der-fachlichen-funktionen">2.2. Übersicht der fachlichen Funktionen</h2>
+<h3 id="erfassenändern-von-daten">2.2.1. Erfassen/Ändern von Daten</h3>
+<p>Um dieses Ziel zu erreichen, können zunächst sowohl Mitarbeiter als auch Weiterbildungen erfasst werden. Mitarbeiter werden mit folgenden Angaben erfasst:</p>
+<ul>
+<li>Name</li>
+<li>Vorname</li>
+<li>Akademische Grade</li>
+<li>Tätigkeit</li>
+</ul>
+<p>Weiterbildungen werden mit folgenden Angaben erfasst:</p>
+<ul>
+<li>Bezeichnung</li>
+<li>Von</li>
+<li>Bis</li>
+<li>Beschreibung</li>
+<li>maximale Teilnehmeranzahl</li>
+<li>minimale Teilnehmeranzahl</li>
+<li>Haupt-Qualifikation</li>
+<li>Zertifikat (optional)</li>
+</ul>
+<p>Nach dem ersten Speichern einer Weiterbildung können weitere Qualifikationen erfasst werden, indem man in der Übersicht, die über den Menü-Eintrag “Pflege Weiterbildungen” erreichbar ist, auf “ändern” klickt und dann auf “weitere Qualifikationen erfassen”.</p>
+<p>Alle eingegeben Daten, sowohl Mitarbeiter- als auch Weiterbildungsdaten, sind nachträglich über den Button “ändern” editierbar. Außerdem kann man Mitarbeiter und Weiterbildungen mit Klick auf einen Button “löschen” wieder aus dem Datenbestand entfernen. Für die Löschung ist eine erneute Bestätigung des Benutzers erforderlich.</p>
+<h4 id="teilnahmen-an-weiterbildungen-erfassenändern">2.2.2. Teilnahmen an Weiterbildungen erfassen/ändern</h4>
+<p>Unter dem Menüpunkt “Teilnahme” sind folgende Funktionalitäten möglich:</p>
+<ul>
+<li>bei <em>zukünftigen</em> Weiterbildungen können Mitarbeiter zu den Weiterbildungen angemeldet werden (Menüpunkt “Sichtweise Mitarbeiter”)</li>
+<li>bei <em>laufenden</em> Weiterbildungen kann die Teilnahme von einzelnen Teilnehmern storniert werden (Menüpunkt “Sichtweise Weiterbildungen”)</li>
+<li>bei bereits <em>abgeschlossenen</em> Weiterbildungen kann eine Teilnahme als “erfolgreich” oder “nicht erfolgreich” eingestuft werden (Menüpunkt “Sichtweise Weiterbildungen”)</li>
+</ul>
+<h3 id="auswertungen">2.2.3. Auswertungen</h3>
+<p>Schließlich werden unter dem Menüpunkt “Auswertungen” nach Kategorien unterteilte Listen angezeigt.</p>
+<ul>
+<li>unter dem Punkt “Mitarbeiter” wird eine alphabetisch sortierte Liste von Mitarbeitern ausgegeben, zusammen mit den jeweiligen Teilnahmen an Weiterbildungen und deren Teilnahmestatus</li>
+<li>unter dem Punkt “Weiterbildungen” wird eine alphabetisch sortierte Liste von allen Weiterbildungen ausgegeben, jeweils mit allen erfolgreichen Teilnehmern</li>
+<li>unter dem Punkt “Zertifikate” wird eine alphabetisch sortierte Liste aller Zeritifkate angezeigt und jeweils alle Mitarbeiter, die dieses Zertifikat besitzen</li>
+</ul>
+<h1 id="beschreibung-der-komponenten-des-servers">3. Beschreibung der Komponenten des Servers</h1>
+<h2 id="server.py">3.1. server.py</h2>
+<h3 id="zweck">3.1.1. Zweck</h3>
+<p>Der Einstiegspunkt bei Serverstart befindet sich in der Datei “server.py”. Hier werden alle Konfigurationen vorgenommen und der Server wird gestartet.</p>
+<h3 id="aufbau">3.1.2. Aufbau</h3>
+<p>Es gibt eine große main-Methode, in der alle nötigen Konfigurationen und die Verzeichnisstruktur festgelegt werden. In der main-Methode wird u.a. auch eingestellt, dass zwei Logfiles angelegt und laufend gepflegt werden: - “access.log”, in der alle HTTP Requests gespeichert werden - “server.log”, in der alle sonstigen Log-Ausgaben gespeichert werden, z.B. wann der Server gestartet wurde und auch wann Fehler auftraten inkl. Fehlerdetails</p>
+<h3 id="zusammenwirken-mit-anderen-komponenten">3.1.3. Zusammenwirken mit anderen Komponenten</h3>
+<p>Diese Klasse interagiert mit anderen Komponenten dadurch, dass die Verzeichnisstruktur hier bestimmt wird. Die Pfad-Angaben von anderen Klassen und Dateien werden dadurch von der “server.py” beeinflusst. Außerdem werden hier die zwei MethodDispatcher (je einer für die Klasse “Application” und einer für die Klasse “Template”) erstellt, die für die REST-Schnittstelle des Servers benötigt werden.</p>
+<h2 id="application.py">3.2. application.py</h2>
+<h3 id="zweck-1">3.2.1. Zweck</h3>
+<p>Steuerung der serverseitigen Verarbeitung und Bereitstellung der REST-Schnittstelle. Alle öffentlichen Methoden befinden sich in der “application.py” und daher wird jede Benutzeranfrage zunächst durch die “application.py” entgegengenommen und von dort aus an die “database.py” weitergeleitet.</p>
+<h3 id="aufbau-1">3.2.2. Aufbau</h3>
+<p>Die “application.py” initialisiert zunächst das Datenbank-Objekt (“database.py”). Dann stellt sie die 4 Methoden der REST-Schnittstelle öffentlich bereit, die alle Benutzeranfragen an den Server entgegennehmen.</p>
+<h3 id="zusammenwirken-mit-anderen-komponenten-1">3.2.3. Zusammenwirken mit anderen Komponenten</h3>
+<p>Die “application.py” interagiert ausschließlich mit der “database.py”, indem es anhand der vorliegenden Parameter entscheidet, was für ein Ziel der Client mit der gesendeten Anfrage erreichen will und dann die entsprechende Methode der “database.py” aufruft.</p>
+<p>// ———————————————————————————————————————— hier weiter</p>
+<h3 id="api">3.2.4. API</h3>
+<p>Indem man folgendes Attribut in der Klasse “Application” festlegt, werden alle Methoden der Klasse öffentlich und somit als Schnittstelle verfügbar gemacht:</p>
+<pre><code>exposed = True</code></pre>
+<h2 id="database.py">3.3. database.py</h2>
+<h3 id="zweck-2">3.3.1. Zweck</h3>
+<p>Diese Klasse ist für die Verwaltung der Daten zuständig, d.h. zum Speichern von neuen Einträgen, zum Abändern und Löschen bereits bestehender Einträge und auch zum Zusammenstellen von temporären Daten, die nur der Anzeige dienen.</p>
+<h3 id="aufbau-2">3.3.2. Aufbau</h3>
+<p>Zu Beginn wird jeweils ein Validator und ein DataId-Objekt initialisiert und jeweils ein Objekt für die Mitarbeiter- und die Weiterbildungs-Daten. Die Daten werden bei der Initialisierung einmalig aus den Ordnern <em>data/employees</em> und <em>data/trainings</em> ausgelesen und im weiteren Verlauf nur noch in die genannten Verzeichnisse zurückgeschrieben.</p>
+<h3 id="zusammenwirken-mit-anderen-komponenten-2">3.3.3. Zusammenwirken mit anderen Komponenten</h3>
+<p>Die “database.py” wird ausschließlich von der “application.py” aufgerufen, für die sie dann Daten bereitstellt, entweder direkt aus den in den beiden “employee_data” oder “training_data” Objekten oder auch Daten, die erst nach vorgegebenen Kriterien berechnet werden. Zum Beispiel für die Auswertungen werden die Auslieferungsdaten immer aufgrund der aktuellen Datenlage erneut berechnet und danach sofort wieder verworfen.</p>
+<h3 id="api-1">3.3.4. API</h3>
+<p>Nahezu alle Methoden sind als Schnittstelle für die “application.py” vorgesehen. Die Ausnahmen bilden die jeweils zwei Methoden zum Einlesen und zum Schreiben der JSON-Dateien.</p>
+<h2 id="dataid.py">3.4. dataid.py</h2>
+<h3 id="zweck-3">3.4.1. Zweck</h3>
+<p>Diese Klasse berechnet mithilfe des Moduls <em>uuid</em> immer eine neue, einzigartige uuid4 und gibt diese an die aufrufende Umgebung zurück.</p>
+<h3 id="aufbau-3">3.4.2. Aufbau</h3>
+<p>Diese Klasse stellt lediglich eine Methode zur Verfügung, um eine neue UUID zu generieren und diese zurückzugeben.</p>
+<h3 id="zusammenwirken-mit-anderen-komponenten-3">3.4.3. Zusammenwirken mit anderen Komponenten</h3>
+<p>Die “dataid.py” wird nur von der “database.py” aus aufgerufen, wenn ein neuer Eintrag gespeichert werden soll.</p>
+<h3 id="api-2">3.4.4. API</h3>
+<p>Die Methode <em>create_new_id()</em> stellt die Schnittstelle für andere Klassen, in diesem Fall für die “database.py” dar.</p>
+<h2 id="dateutils.py">3.5. dateutils.py</h2>
+<h3 id="zweck-4">3.5.1. Zweck</h3>
+<p>Diese Klasse stellt Hilfsmethoden zur Datums-Verarbeitung bereit.</p>
+<h3 id="aufbau-4">3.5.2. Aufbau</h3>
+<p>Bei Objekterzeugung wird das Attribut “today” mit dem aktuellen Tag initialisiert. Außerdem gibt es eine Methode, die aus einem als String vorliegendem Datum ein <em>datetime</em>-Objekt erzeugt.</p>
+<h3 id="zusammenwirken-mit-anderen-komponenten-4">3.5.3. Zusammenwirken mit anderen Komponenten</h3>
+<p>Die DateUtils-Klasse ruft ihrerseits nur builtin Klassen von Python auf, sie ist lediglich eine Hilfs-Klasse für die “database.py” mit den vorgenannten Methoden.</p>
+<h3 id="api-3">3.5.4. API</h3>
+<p>Die einzige Methoden in dieser Klasse stellt die Schnittstelle für andere Klassen dar.</p>
+<h2 id="template.py">3.6. template.py</h2>
+<h3 id="zweck-5">3.6.1. Zweck</h3>
+<p>Diese Klasse stellt eine öffentliche GET-Methode bereit, deren Ziel es ist, alle Templates zu bündeln und auf einmal bei Applikationsstart auszuliefern.</p>
+<h3 id="aufbau-5">3.6.2. Aufbau</h3>
+<p>Diese Klasse besteht aus einem leeren Konstruktor und der oben bereits genannten GET-Methode</p>
+<h3 id="zusammenwirken-mit-anderen-komponenten-5">3.6.3. Zusammenwirken mit anderen Komponenten</h3>
+<p>Diese Klasse interagiert nur einmalig bei Applikations-Start mit dem Client. Mit anderen serverseitigen Klassen interagiert sie nicht.</p>
+<h3 id="api-4">3.6.4. API</h3>
+<p>Die einzige Methoden in dieser Klasse stellt die Schnittstelle für den Client dar (GET).</p>
+<h1 id="datenablage">4. Datenablage</h1>
+<p>Die Datenablage wurde mit folgenden 2 Verzeichnissen und jeweils 0 bis n untergeordneten JSON-Dateien umgesetzt:</p>
+<ul>
+<li><em>data/employees</em></li>
+<li><em>data/trainings</em></li>
+</ul>
+<p>Für jeden einzelnen Mitarbeiter sowie für jede einzelne Weiterbildung werden einzelne <em>.json</em>-Dateien im jeweiligen Ordner angelegt. Sowohl ein Mitarbeiter als auch eine Weiterbildung haben eine eindeutige ID (uuid4).</p>
+<p>Jeder Mitarbeiter hat darüber hinaus ein dict (Python-Datentyp: dictionary), in dem 0 bis n ID’s von Weiterbildungen hinterlegt werden können mit dem dazugehörigen Teilnahmestatus als String. Die ID ist jeweils der Schlüssel und der Teilnahmestatus der dazugehörige Wert.</p>
+<p>Jede Weiterbildung hat jeweils eine Liste für die Qualifikationen (1 bis n) und eine für das Zertifikat (0 oder 1).</p>
+<p>Weitere Daten werden nicht gespeichert, denn weitere benötigte Daten, wie z.B. die Zuordnung von Zertifikaten und Qualifikationen zu einem Mitarbeiter werden in Echtzeit aus den vorgenannten Daten generiert. So wird die Komplexität der Datenstruktur minimiert und das Risiko, bei einer Änderung der Daten an einer Stelle die Änderung an anderer Stelle fehlerhafterweise zu vergessen, minimiert.</p>
+<p>Ebenso werden Sortierungen (z.B. nach dem Alphabet) in Echtzeit vorgenommen. Diese Sortierung spiegelt sich nicht in der Datengrundlage wider.</p>
+<h1 id="konfiguration">5. Konfiguration</h1>
+<p>In der “server.py” wird das Root-Verzeichnis als das Verzeichnis festgelegt, in dem sich auch die “server.py” befindet. Außerdem wird das Objekt “Application” aus der “application.py” an das Verzeichnis <em>/app</em> gemountet und ein MethodDispatcher für diese Klasse erstellt. Der MethodDispatcher sorgt dafür, dass GET-, POST-, DELETE- und PUT-Requests des Clients bei der richtigen Methode (bzw. überhaupt am Server) ankommen.</p>
+<p>Auch für die “template.py”-Klasse wird ein MethodDispatcher erstellt und die Klasse wird an das Verzeichnis <em>/templates</em> gemountet.</p>
+<p>Darüber hinaus legt die Zeile</p>
+<pre><code>cherrypy.config.update({&#39;log.access_file&#39;: &quot;access.log&quot;, &#39;log.error_file&#39;: &quot;server.log&quot;, &#39;log.screen&#39;: True, })</code></pre>
+<p>fest, dass zwei Logfiles angelegt werden, die kontinuierlich gepflegt werden solange der Server gestartet ist.</p>
+<h1 id="durchführung-und-ergebnis-der-geforderten-prüfungen">6. Durchführung und Ergebnis der geforderten Prüfungen</h1>
+<h2 id="überprüfung-des-htmls">6.1. Überprüfung des HTMLs</h2>
+<p>Um die Korrektheit der HTML-Seiten zu überprüfen, wurde der Seitenquelltext von jeder einzelnen Unterseite in das Eingabefeld der Seite <a href="https://validator.w3.org/#validate_by_input">The W3C Markup Validation Service</a> rein kopiert und das Ergebnis dann für vereinzelte Korrekturen an den Templates benutzt. Nun sieht das Ergebnis jeder einzelnen Unterseite wie folgt aus:</p>
+<figure>
+<img src="W3_HTML_Check_Startseite.png" title="Ergebnis der HTML Überprüfung" alt="Ergebnis der HTML Überprüfung" /><figcaption aria-hidden="true">Ergebnis der HTML Überprüfung</figcaption>
+</figure>
+<h2 id="überprüfung-des-css">6.2. Überprüfung des CSS</h2>
+<p>Um die Korrektheit des CSS zu überprüfen, wurde die “mq.css” Datei in das Eingabefeld der Seite <a href="http://jigsaw.w3.org/css-validator/#validate_by_input">The W3C CSS Validation Service</a> kopiert. Das Ergebnis zeigte keine Fehler an und das daraus resultierende Icon ist in der Webseite mit eingebunden:</p>
+<figure>
+<img src="W3_CSS_Check.png" title="Ergebnis der CSS-Auswertung" alt="Ergebnis der CSS-Auswertung" /><figcaption aria-hidden="true">Ergebnis der CSS-Auswertung</figcaption>
+</figure>
+</body>
+</html>

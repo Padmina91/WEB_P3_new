@@ -7,25 +7,25 @@ import json
 import operator
 
 from .dataid import DataId
-from .validator import Validator
+from .dateutils import DateUtils
 
 class Database:
 
    def __init__(self):
+      self.id = DataId()
+      self.dateUtils = DateUtils()
       self.data_dir = self.get_data_dir()
       self.employee_dir = self.get_employee_dir()
       self.training_dir = self.get_training_dir()
-      self.validator = Validator()
       self.employee_data = None
       self.training_data = None
-      self.max_id = DataId()
       self.read_employee_data()
       self.read_training_data()
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
    def new_employee_entry(self, employee_data):
-      id = self.max_id.create_new_id()
+      id = self.id.create_new_id()
       dict_employee = dict()
       dict_employee["id"] = id
       dict_employee["Daten"] = employee_data
@@ -34,7 +34,7 @@ class Database:
       return str(id)
 
    def new_training_entry(self, training_data):
-      id = self.max_id.create_new_id()
+      id = self.id.create_new_id()
       dict_training = dict()
       dict_training["id"] = id
       dict_training["Daten"] = training_data
@@ -263,7 +263,7 @@ class Database:
       employee_data = self.read_employee(id_param)
       training_data = self.training_data
       already_registered_trainings = list()
-      today = self.validator.today
+      today = self.dateUtils.today
       data = [id_param, employee_data]
       data.append(list())
       data.append(list())
@@ -271,7 +271,7 @@ class Database:
          if v == "angemeldet":
             already_registered_trainings.append(k)
       for training in training_data:
-         start_date = self.validator.get_date(training['Daten'][1])
+         start_date = self.dateUtils.get_date(training['Daten'][1])
          if start_date > today:
             if training['id'] not in already_registered_trainings:
                data[2].append([training['id'], training['Daten'][0], training['Daten'][1], training['Daten'][2], training['Daten'][3]])
@@ -283,11 +283,11 @@ class Database:
       data = list()
       data.append(list()) # laufende Trainings
       data.append(list()) # abgeschlossene Trainings
-      today = self.validator.today
+      today = self.dateUtils.today
       training_data = self.training_data
       for training in training_data:
-         start_date = self.validator.get_date(training['Daten'][1])
-         end_date = self.validator.get_date(training['Daten'][2])
+         start_date = self.dateUtils.get_date(training['Daten'][1])
+         end_date = self.dateUtils.get_date(training['Daten'][2])
          if start_date < today and end_date > today:
             data[0].append([training['id'], training['Daten'][0], training['Daten'][1], training['Daten'][2], training['Daten'][3], training['Daten'][4], training['Daten'][5]])
          elif end_date < today:
@@ -343,9 +343,9 @@ class Database:
       num_of_trainings_finished = 0
       num_of_trainings_currently_running = 0
       for training in self.training_data:
-         start_date = self.validator.get_date(training['Daten'][1])
-         end_date = self.validator.get_date(training['Daten'][2])
-         today = self.validator.today
+         start_date = self.dateUtils.get_date(training['Daten'][1])
+         end_date = self.dateUtils.get_date(training['Daten'][2])
+         today = self.dateUtils.today
          if start_date > today:
             num_of_trainings_in_planning += 1
          elif end_date < today:
