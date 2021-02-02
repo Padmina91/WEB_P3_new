@@ -6,11 +6,11 @@ class FormTraining {
         this.template = template;
     }
 
-    render(id = null) {
-        this.id = id;
+    render(id_training = null) {
+        this.training_id = id_training;
         let path = "/app?training=True&form=True"
-        if (id != null) {
-            path = path + "&id=" + id;
+        if (id_training != null) {
+            path = path + "&id=" + this.training_id;
         }
         let requester = new APPUTIL.Requester();
         requester.GET(path)
@@ -107,21 +107,16 @@ class FormTraining {
                     break;
                 }
             }
-            let form_element = document.getElementById("form");
-            let formData = new FormData(form_element);
-            APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, [this.id, index_of_selected_entry]]);
-            event.preventDefault();
+            APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, [this.training_id, index_of_selected_entry]]);
         }
     }
 
     handleAddEvent(event) {
-        APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, [this.id, null]]);
-        event.preventDefault();
+        APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, [this.training_id, null]]);
     }
 
     handleCancelEvent(event) {
         APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, null]);
-        event.preventDefault();
     }
 
     handleDeleteEvent(event) {
@@ -139,12 +134,11 @@ class FormTraining {
                         break;
                     }
                 }
-                let path = "/app?id_training=" + this.id + "&index_qualification=" + index_of_selected_entry;
+                let path = "/app?id_training=" + this.training_id + "&index_qualification=" + index_of_selected_entry;
                 let requester = new APPUTIL.Requester();
                 requester.DELETE(path)
                 .then (result => {
-                    this.do_render(JSON.parse(result));
-                    this.configHandleEvent();
+                    APPUTIL.event_service.publish("app.cmd", [event.target.dataset.href, this.training_id]);
                 })
                 .catch (error => {
                     alert("fetch-error (get): " + error);

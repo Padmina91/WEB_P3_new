@@ -6415,3 +6415,6 @@
 127.0.0.1 - - [01/Feb/2021:22:49:19] "POST /app?id_param=a87a368e-3132-41dd-b4b3-35a808f98493&index=1&bezeichnung=%22Irgendeine%20Test-Qualifikation%22 HTTP/1.1" 200 - "" "vscode-restclient"
 127.0.0.1 - - [01/Feb/2021:22:49:37] "POST /app?id_param=a87a368e-3132-41dd-b4b3-35a808f98493&index=1&bezeichnung=Irgendeine%20Test-Qualifikation HTTP/1.1" 200 - "" "vscode-restclient"
 127.0.0.1 - - [01/Feb/2021:22:50:01] "POST /app?id_param=a87a368e-3132-41dd-b4b3-35a808f98493&index=1&bezeichnung=Irgendeine%20Test-Qualifikation HTTP/1.1" 200 - "" "vscode-restclient"
+127.0.0.1 - - [02/Feb/2021:18:52:05] "DELETE /app?id_employee=ce44e4b7-a464-4088-88b3-1b8883a11f8d HTTP/1.1" 200 - "" "vscode-restclient"
+127.0.0.1 - - [02/Feb/2021:18:52:17] "DELETE /app?id_training=a87a368e-3132-41dd-b4b3-35a808f98493 HTTP/1.1" 200 - "" "vscode-restclient"
+127.0.0.1 - - [02/Feb/2021:18:52:26] "DELETE /app?id_training=c738556c-f523-498d-95e2-dfbc5b195786&index_qualification=1 HTTP/1.1" 200 - "" "vscode-restclient"

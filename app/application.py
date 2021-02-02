@@ -64,18 +64,13 @@ class Application:
 
 
    def DELETE(self, id_training=None, id_employee=None, index_qualification=None):
-      return_value = ''
       if id_training != 'None' and id_training != None:
          if index_qualification == 'None' or index_qualification == None:
             self.database.delete_training_entry(id_training)
-            return_value = self.database.training_data
          else:
             self.database.delete_qualification(id_training, index_qualification)
-            return_value = self.database.get_training_with_id(id_training)
       elif id_employee != 'None' and id_employee != None:
             self.database.delete_employee_entry(id_employee)
-            return_value = self.database.employee_data
-      return json.dumps(return_value)
 
 
    def POST(self, id_param=None, index=None, name=None, vorname=None, akadGrade=None, taetigkeit=None, bezeichnung=None, von=None, bis=None, beschreibung=None, maxTeiln=None, minTeiln=None, qualification0=None, zertifikat=None):
